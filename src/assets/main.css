@@ -1,0 +1,20 @@
+@import './base.css';
+
+#app {
+  margin:1vmin;
+  padding: 0 auto;
+  font-weight: normal;
+}
+
+p{
+  font-family: Raleway, sans-serif;}
+
+.h-link{
+  color:white;
+  text-decoration: none;
+}
+
+button:hover{
+  transition: 0.5s;
+  cursor: pointer;
+}
