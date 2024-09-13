@@ -218,6 +218,9 @@ const handleMakeChoice = () => {
   background-color: var(--secondary-color);
   color: white;
 }
+label, .form-select{
+  font-size: 1.7vmin;
+}
 
 @media (max-width: 768px) {
 .btn{
@@ -246,6 +249,9 @@ p{
 }
 .make-choice{
   font-size: 18px;
+}
+label, .form-select{
+  font-size: 2.5vmin;
 }
 }
 </style>

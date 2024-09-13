@@ -79,7 +79,7 @@ const closeOverlay = () => {
   gap: 3vmin
 }
 .find{
-  background-color: var(--primary-color);
+  background-color: var(--primary-blue);
   border: var(--primary-color) 0.3vmin solid;
 }
 .find:hover{
