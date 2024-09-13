@@ -9,3 +9,19 @@ import TheFooter from './components/TheFooter.vue';
   <RouterView class="content" />
   <TheFooter class="footer" />
 </template>
+
+<style scoped>
+.header {
+  position: fixed;
+  z-index: 99;
+}
+
+@media (max-width: 768px) {
+  .header {
+  position: absolute;
+}
+.content {
+  margin-top: 0;
+}
+}
+</style>
