@@ -1,11 +1,18 @@
 <template>
-        <div class="overlay">
-            <div class="overlay-c">
-       <img src="../assets/Close_MD.svg" alt="logo" class="close-icon" @click="$emit('close')">
-        <slot></slot>
+    <div class="overlay" @click="handleBackgroundClick">
+        <div class="overlay-c" @click.stop>
+            <img src="../assets/Close_MD.svg" alt="logo" class="close-icon" @click="emit('close')">
+            <slot></slot>
         </div>
     </div>
 </template>
+
+<script setup>
+const emit = defineEmits(['close'])
+function handleBackgroundClick() {
+    emit('close')
+}
+</script>
 
 <style scoped>
     .overlay{

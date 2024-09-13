@@ -4,25 +4,25 @@
         <div class="contact">
         <h4 class="contact-title mb-5">Contact me</h4>
     <div class="contact-component">
-        <form>
+        <form class="contact-form" @submit.prevent="handleSubmit">
             <div class="name">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="firstname"  required>
+                    <input v-model="firstname" type="text" class="form-control" id="floatingInput" placeholder="firstname"  required>
                     <label for="floatingInput">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="lastname"  required>
+                    <input v-model="lastname" type="text" class="form-control" id="floatingInput" placeholder="lastname"  required>
                     <label for="floatingInput">Last Name</label>
                 </div>
             </div>
             <div class="email form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="email"  required>
+                <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="email"  required>
                 <label for="floatingInput">Email</label>
             </div>
             <div class="message form-group mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your message" required></textarea>
+                <textarea v-model="message" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your message" required></textarea>
             </div>
-            <BaseButton type="submit" class="submit-btn">Send</BaseButton>
+            <BaseButton type="submit" class="submit-btn" :disabled="isSubmitting">{{isSubmitting ? 'sending...' : 'send message'}}</BaseButton>
 
          </form>
         <div class="right-part">
@@ -45,45 +45,57 @@
  
  <script setup>
  import { ref } from 'vue';
- import BaseOverlay from '../components/BaseOverlay.vue'
- import BaseButton from '@/components/BaseButton.vue';
+ import emailjs from 'emailjs-com';
  
- const firstName = ref('');
- const lastName = ref('');
+ import BaseButton from '@/components/BaseButton.vue';
+ import BaseOverlay from '@/components/BaseOverlay.vue';
+ 
+ const firstname = ref('');
+ const lastname = ref('');
  const email = ref('');
  const message = ref('');
  
- const sendEmail = async () => {
+ const isSubmitting = ref(false);
+ const submitError = ref('');
+ 
+ const serviceID = 'service_7klxz2l';
+   const templateID = 'template_bu3mrbg';
+   const userID = 'gZN89EuNcBtTr07K4';
+ 
+ const handleSubmit = async () => {
+   if (!validateForm()) return;
+ 
+   isSubmitting.value = true;
+ 
    try {
-     const response = await fetch('http://localhost:3000/send-email', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({
-         firstName: firstName.value,
-         lastName: lastName.value,
-         email: email.value,
-         message: message.value,
-       }),
-     });
-     
-     if (response.ok) {
-      alert('Email sent successfully!');
-      // Clear form fields
-      firstName.value = '';
-      lastName.value = '';
-      email.value = '';
-      message.value = '';
-    } else {
-      alert('Failed to send email. Please try again.');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again.');
-  }
-};
-</script>
+     const formData = {
+   from_name: firstname.value + ' ' + lastname.value,
+   from_email: email.value, 
+   message_html: message.value 
+ };
+ 
+     const response = await emailjs.send(serviceID, templateID, formData, userID);
+ 
+     if (response.status === 200) {
+       alert('Message sent successfully!');
+     } else {
+       submitError.value = 'Failed to send the message. Please try again later.';
+     }
+   } catch (error) {
+     submitError.value = 'Error occurred. Please try again later.';
+   } finally {
+     isSubmitting.value = false;
+   }
+ };
+ 
+ const validateForm = () => {
+   if (!firstname.value || !email.value || !message.value) {
+     submitError.value = 'All fields are required.';
+     return false;
+   }
+   return true;
+ };
+ </script>
  
  <style scoped>
  form {

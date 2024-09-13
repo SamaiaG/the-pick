@@ -6,14 +6,19 @@
 
 <style scoped>
     button{
-        padding: 1.5vmin 3.5vmin;
+        padding: 1.4vmin 3.4vmin;
         border: none;
         border-radius: 0.8vmin;
         background-color: var(--color-primary);
         color: var(--color-text);
-        font-size: 2vmin;
+        font-size: 1.8vmin;
         font-family: Raleway, sans-serif;
         cursor: pointer;
         font-weight: 600;
+    }
+    @media (max-width: 768px) {
+        button{
+            font-size: 12px;
+        }
     }
 </style>

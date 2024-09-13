@@ -5,11 +5,11 @@
       <label for="floatingInput">What is your name?</label>
     </div>
     <select class="form-select decision-type mb-3" aria-label="Default select example" @change="updateDecisionType($event)" v-model="formData.decisionType" required>
-  <option value="" disabled selected>What are you not sure with?</option>
-  <option value="1">I have to make a personal decision.</option>
-  <option value="2">It's someone's birthday (or other party).</option>
-  <option value="3">To be or not to be?!</option>
-</select>
+      <option value="" disabled selected>What are you not sure with?</option>
+      <option value="1">I have to make a personal decision.</option>
+      <option value="2">It's someone's birthday (or other party).</option>
+      <option value="3">To be or not to be?!</option>
+    </select>
     <div class="if-party" v-if="formData.decisionType === '2'">
       <select class="form-select party-person mb-3" aria-label="Default select example" @change="updateDecisionType($event)" v-model="formData.specialPerson" required>
         <option value="" disabled selected >Who is this special person for you?</option>
@@ -25,7 +25,7 @@
     </div>
     <div class="card_number mb-3 d-flex justify-content-between align-items-center">
       <p>How many cards do you need?</p>
-      <div class="card-number d-flex gap-5">
+      <div class="card-number d-flex">
         <button 
           v-for="option in cardOptions" 
           :key="option"
@@ -37,7 +37,7 @@
         </button>
       </div>
     </div>
-    <div class="option-cards mb-3 d-flex wrap justify-content-center gap-3">
+    <div class="option-cards d-flex wrap justify-content-center gap-3">
       <OptionCard class="card1" imageSrc="src/assets/card1.jpg" altText="card1" title="1" @click="openOverlay(1)" />
       <OptionCard class="card2" imageSrc="src/assets/card2.jpg" altText="card2" title="2" @click="openOverlay(2)" />
       <OptionCard class="card3" imageSrc="src/assets/card3.jpg" altText="card3" title="3" v-if="formData.cardNumber === 3" @click="openOverlay(3)" />
@@ -45,7 +45,7 @@
     <p class="mb-3 align-self-start">Now that you've completed the cards, it's time for the choice to be made!</p>
     <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
       <p>Who will pick the card and make the choice?</p>
-      <div class="users d-flex gap-5">
+      <div class="users d-flex">
         <button 
           v-for="user in userOptions" 
           :key="user"
@@ -70,6 +70,7 @@
     <BaseButton @click="openConfirmAction" class="make-choice">Make the choice</BaseButton>
     <p v-if="generatedLink">Share this link: <a :href="generatedLink">{{ generatedLink }}</a></p>
   </div>
+
   <OptionOverlay v-if="isOptionOverlayVisible" :fields="cardFields[activeCard]" :cardIndex="activeCard" @close="closeOverlay"  @save="saveCardFields"/>
   <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="makeChoice">
     <BaseButton @click="handleMakeChoice" class="make-choice">Yes I am</BaseButton>
@@ -175,6 +176,7 @@ const handleMakeChoice = () => {
   flex-direction: column;
   align-items: center;
 }
+
 .form-floating, .if-party, .se-chooses{
   width: 100%;
 }
@@ -193,7 +195,13 @@ const handleMakeChoice = () => {
   color: white;
   cursor: pointer;
 }
+.option-cards{
+  gap: 3vmin
+}
 
+.users, .card-number{
+  gap: 5vmin
+}
 .btn, .form-control, .form-select {
   border: none;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -211,5 +219,24 @@ const handleMakeChoice = () => {
   color: white;
 }
 
-
+@media (max-width: 768px) {
+.btn{
+  padding: 0.5vmin 0.8vmin;
+  font-size: 2vmin;
+}
+.users, .card-number{
+  gap: 2vmin
+}
+.option-cards {
+  flex-direction: column;
+  gap: 0
+}
+.card-button{
+  width: 100%;
+  height: 30vh;
+}
+p{
+  margin-bottom: 0;
+}
+}
 </style>

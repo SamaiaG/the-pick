@@ -55,7 +55,7 @@ header {
 
 .h-container{
     display: flex;
-    padding: 0 160px;
+    padding: 0 16vmin;
     justify-content: space-between;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.6);
@@ -78,4 +78,15 @@ header {
 .h-link:hover{
     background-color: var(--primary-op);
 }
+
+@media (max-width: 1024px) {
+        .h-container{
+            padding: 0 8vmin;
+        }
+    }
+    @media (max-width: 768px) {
+        .h-container{
+            padding: 0 4vmin;
+        }
+    }
 </style>

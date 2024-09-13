@@ -1,6 +1,4 @@
 <template>
-    <div class="find-component">
-   <BaseOverlay>
     <div class="find-more">
         <h4>This tool has the purpose to make your life easier by helping you to FINALLY decide.</h4>
         <p>This is how it works:</p>
@@ -13,9 +11,6 @@
         </ol>
         <h3>Voila! The decision was made, no way back now!</h3>
     </div>
-    </BaseOverlay>
-</div>
-    
 </template>
 
 <script setup>
