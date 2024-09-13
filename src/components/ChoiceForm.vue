@@ -38,9 +38,9 @@
       </div>
     </div>
     <div class="option-cards d-flex wrap justify-content-center">
-      <OptionCard class="card1" imageSrc="src/assets/card1.jpg" altText="card1" title="1" @click="openOverlay(1)" />
-      <OptionCard class="card2" imageSrc="src/assets/card2.jpg" altText="card2" title="2" @click="openOverlay(2)" />
-      <OptionCard class="card3" imageSrc="src/assets/card3.jpg" altText="card3" title="3" v-if="formData.cardNumber === 3" @click="openOverlay(3)" />
+      <OptionCard class="card1" imageSrc="cards/card1.jpg" altText="card1" title="1" @click="openOverlay(1)" />
+      <OptionCard class="card2" imageSrc="cards/card2.jpg" altText="card2" title="2" @click="openOverlay(2)" />
+      <OptionCard class="card3" imageSrc="cards/card3.jpg" altText="card3" title="3" v-if="formData.cardNumber === 3" @click="openOverlay(3)" />
     </div>
     <p class="mb-3 align-self-start">Now that you've completed the cards, it's time for the choice to be made!</p>
     <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
@@ -245,7 +245,7 @@ p{
   text-align: center;
 }
 .make-choice{
-  font-size: 24px;
+  font-size: 18px;
 }
 }
 </style>

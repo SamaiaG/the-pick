@@ -55,6 +55,8 @@ const closeOverlay = () => {
     background-color: black;
     color: white;
     font-size: 1.3vmin;
+    padding: 4vmin 16vmin
+
 }
 .right-part{
     display: flex;
@@ -70,7 +72,6 @@ const closeOverlay = () => {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    padding: 40px 0 20px;
 }
 
 .logo2{
@@ -78,4 +79,38 @@ const closeOverlay = () => {
     padding-bottom: 1vmin;
 }
 
+@media (max-width: 1024px) {
+        .footer{
+            padding: 4vmin 8vmin;
+            font-size: 12px;
+        }
+    }
+    @media (max-width: 768px) {
+        .footer{
+            padding: 4vmin 4vmin;
+        }
+        .container{
+            flex-direction: column;
+            align-items: center;
+            gap: 4vmin
+        }
+        .nav{
+            flex-direction: column;
+            align-items: center;
+        }
+        .left-part{
+            text-align: center;
+        }
+        .right-part{
+            align-self: center;
+        }
+        .copyright{
+            order: 3;
+        }
+        .logo2{
+    width: 22vmin;
+    padding-bottom: 12px;
+}
+    
+    }
 </style>
