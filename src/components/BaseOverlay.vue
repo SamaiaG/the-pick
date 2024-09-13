@@ -26,7 +26,7 @@ function handleBackgroundClick() {
         background-color: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(4px);
         border-radius: 10px;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .overlay-c{

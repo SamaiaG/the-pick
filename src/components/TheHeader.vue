@@ -11,6 +11,16 @@
       </div>
       <HamburgerMenu class="hamburger-menu" v-if="isHamOpen" :closeHam="toggleHam" />
 
+
+<BaseOverlay v-if="isFindMoreVisible"  @close="closeOverlay">
+  <FindMore class="find-more" />
+</BaseOverlay>
+<BaseOverlay v-if="isShareOutsideVisible"  @close="closeOverlay">
+  <ShareOutside class="share-outside"/>
+</BaseOverlay>
+<BaseOverlay v-if="isContactOverlayVisible"  @close="closeOverlay">
+  <ContactComponent class="contact-component" />
+</BaseOverlay>
 </header>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
-    <div class="contact-component">
-    <BaseOverlay>
+    <div class="contact">
         <div class="contact">
         <h4 class="contact-title mb-5">Contact me</h4>
     <div class="contact-component">
@@ -39,7 +38,6 @@
             
         </div>
     </div>
-     </BaseOverlay>
     </div>
  </template>
  

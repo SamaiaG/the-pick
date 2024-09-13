@@ -12,11 +12,11 @@
     </select>
     <div class="if-party" v-if="formData.decisionType === '2'">
       <select class="form-select party-person mb-3" aria-label="Default select example" @change="updateDecisionType($event)" v-model="formData.specialPerson" required>
-        <option value="" disabled selected >Who is this special person for you?</option>
-        <option value="1">Wife/Husband</option>
-        <option value="2">A friend</option>
-        <option value="3">A work buddy</option>
-        <option value="4">Someone else</option>
+        <option value="" disabled selected>Who is this special person for you?</option>
+        <option value="1" class="option">Wife/Husband</option>
+        <option value="2" class="option">A friend</option>
+        <option value="3" class="option">A work buddy</option>
+        <option value="4" class="option">Someone else</option>
       </select>
       <div class="form-floating person-name mb-3">
         <input type="text" class="form-control" id="personNameInput" placeholder="Person's name" v-model="formData.personName" required>
@@ -221,7 +221,9 @@ const handleMakeChoice = () => {
 label, .form-select{
   font-size: 1.7vmin;
 }
-
+.option{
+  font-size: 12px;
+}
 @media (max-width: 768px) {
 .btn{
   padding: 0.6vmin 3vmin;

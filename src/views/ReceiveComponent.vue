@@ -219,5 +219,19 @@ onMounted(() => {
   .end-message{
     margin-top: 2.5vmin;
   }
+
+  @media (max-width: 768px) {
+    .hero-receive{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-p{
+      text-align: center;
+    }
+    :deep(.second-section > .s-container){
+  padding:  8vmin 4vmin;
+}
+  }
 </style>
   

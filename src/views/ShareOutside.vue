@@ -1,6 +1,6 @@
 <template>
     <div class="share-outside">
-        <h4>Share it with your friends!</h4>
+        <h4 class="title">Share it with your friends!</h4>
         <div class="share-links">
             <ShareNetwork
             network="facebook"
@@ -35,14 +35,13 @@
 
             </ShareNetwork>
             <button class="copy-link" @click="copyLink">
-                <img src="../assets/link.svg" alt="Copy Link" />
+                <img src="../assets/link.svg" alt="Copy Link" class="social-icon"  />
             </button>
         </div>
     </div>
 </template>
 
 <script setup>
-import BaseOverlay from '../components/BaseOverlay.vue'
 import {ref} from 'vue'
 
 const copyDone = ref(false)
@@ -69,6 +68,9 @@ const copyLink = () => {
     gap: 2rem;
 }
 
+.title{
+    font-size: 2.5vmin;
+}
 .share-links{
     display: flex;
     gap: 3vmin;
@@ -77,5 +79,9 @@ const copyLink = () => {
     background-color: transparent;
     border: none;
     padding: 0;
+}
+.social-icon{
+    width: 5vmin;
+    height: 5vmin;
 }
 </style>
