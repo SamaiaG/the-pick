@@ -23,7 +23,7 @@
         <label for="personNameInput">What is her/his name?</label>
       </div>
     </div>
-    <div class="card_number mb-3 d-flex justify-content-between align-items-center">
+    <div class="cards mb-3 d-flex justify-content-between align-items-center">
       <p>How many cards do you need?</p>
       <div class="card-number d-flex">
         <button 
@@ -37,7 +37,7 @@
         </button>
       </div>
     </div>
-    <div class="option-cards d-flex wrap justify-content-center gap-3">
+    <div class="option-cards d-flex wrap justify-content-center">
       <OptionCard class="card1" imageSrc="src/assets/card1.jpg" altText="card1" title="1" @click="openOverlay(1)" />
       <OptionCard class="card2" imageSrc="src/assets/card2.jpg" altText="card2" title="2" @click="openOverlay(2)" />
       <OptionCard class="card3" imageSrc="src/assets/card3.jpg" altText="card3" title="3" v-if="formData.cardNumber === 3" @click="openOverlay(3)" />
@@ -181,7 +181,7 @@ const handleMakeChoice = () => {
   width: 100%;
 }
 
-.deciding-user, .card_number{
+.deciding-user, .cards{
   width: 100%;
 }
 .make-choice{
@@ -221,11 +221,11 @@ const handleMakeChoice = () => {
 
 @media (max-width: 768px) {
 .btn{
-  padding: 0.5vmin 0.8vmin;
-  font-size: 2vmin;
+  padding: 0.6vmin 3vmin;
+  font-size: 3vmin;
 }
 .users, .card-number{
-  gap: 2vmin
+  gap: 5vmin
 }
 .option-cards {
   flex-direction: column;
@@ -233,10 +233,19 @@ const handleMakeChoice = () => {
 }
 .card-button{
   width: 100%;
-  height: 30vh;
+  height: 20vh;
+}
+.cards, .deciding-user{
+  flex-direction: column !important;
+  gap: 2vmin
 }
 p{
   margin-bottom: 0;
+  font-size: 18px;
+  text-align: center;
+}
+.make-choice{
+  font-size: 24px;
 }
 }
 </style>
