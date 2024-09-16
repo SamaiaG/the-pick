@@ -122,10 +122,10 @@ const capitalize = (str) => {
 }
 
 onMounted(() => {
-  const data = route.params.data;
-  if (data) {
+  const dataParam = route.params.data; 
+  if (dataParam) {
     try {
-      const parsedData = JSON.parse(decodeURIComponent(data));
+      const parsedData = JSON.parse(decodeURIComponent(dataParam));
       
       if (parsedData.cardFields) {
         cardFields.value = parsedData.cardFields;

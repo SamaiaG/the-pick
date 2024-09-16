@@ -149,18 +149,17 @@ const shuffleCards = () => {
 };
 
 const handleMakeChoice = () => {
-  // Serialize the form data and card fields
-  const serializedData = encodeURIComponent(JSON.stringify({
+  const shuffleCardsFields = shuffleCards();
+  const shuffledFormData = {
     ...formData.value,
-    cardFields: shuffleCards()
-  }));
+    cardFields: shuffleCardsFields
+  };
 
-  // Construct the URL with dunamic parameter
-  const baseUrl = import.meta.env.BASE_URL; 
-  const link = `${baseUrl}receive/${serializedData}`;
+  const serializedData = encodeURIComponent(JSON.stringify(shuffledFormData));
+  const baseUrl = import.meta.env.BASE_URL;
+  const path = `receive/${serializedData}`; // Use dynamic route with parameter
 
-  generatedLink.value = link;
-
+  const link = `${baseUrl}${path}`;
   window.location.href = link;
 };
 </script>
