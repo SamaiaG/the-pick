@@ -155,9 +155,9 @@ const handleMakeChoice = () => {
     cardFields: shuffleCards()
   }));
 
-  // Construct the URL with the serialized data as a query parameter
+  // Construct the URL with dunamic parameter
   const baseUrl = import.meta.env.BASE_URL; 
-  const link = `${baseUrl}receive/?data=${serializedData}`;
+  const link = `${baseUrl}receive/${serializedData}`;
 
   generatedLink.value = link;
 
