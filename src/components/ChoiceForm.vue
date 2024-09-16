@@ -157,9 +157,7 @@ const handleMakeChoice = () => {
 
   const serializedData = encodeURIComponent(JSON.stringify(shuffledFormData));
   const baseUrl = import.meta.env.BASE_URL;
-  const path = `receive/${serializedData}`; // Use dynamic route with parameter
-
-  const link = `${baseUrl}${path}`;
+  const link = `${baseUrl}receive?data=${serializedData}`;
   window.location.href = link;
 };
 </script>

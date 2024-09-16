@@ -13,10 +13,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/receive/:data',
+      path: '/receive',
       name: 'receive',
-      component: ReceiveComponent,
-      props: route => ({ data: route.params.data })
+      component: ReceiveComponent
     },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: PathNotFound },
 

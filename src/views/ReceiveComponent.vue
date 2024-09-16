@@ -75,6 +75,7 @@ import BaseOverlay from '@/components/BaseOverlay.vue';
 import ConfirmAction from '@/components/ConfirmAction.vue';
 
 const route = useRoute();
+
 const formData = ref(null);
 const cardFields = ref([]);
 const decisionTypeText = ref('');
@@ -121,8 +122,9 @@ const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
 
+
 onMounted(() => {
-  const dataParam = route.params.data; 
+  const dataParam = route.query.data;
   if (dataParam) {
     try {
       const parsedData = JSON.parse(decodeURIComponent(dataParam));
@@ -136,10 +138,10 @@ onMounted(() => {
       }
     } catch (error) {
       console.error('Error parsing data:', error);
-      formData.value = { cardNumber: 2 }; 
+      formData.value = { cardNumber: 2 };
     }
   } else {
-    formData.value = { cardNumber: 2 }; 
+    formData.value = { cardNumber: 2 };
   }
 });
 </script>
