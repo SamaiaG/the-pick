@@ -114,6 +114,13 @@ const selectedVisible = () => {
     isSecondSectionVisible.value = false;
 }
 
+const makeChoice = () => {
+  // This is the missing method that was referenced in the warning
+  // Here you can handle logic such as sending the selected card to a server
+  console.log("Choice confirmed with card number: ", selectedCard.value);
+  selectedVisible(); // Show the selected card
+}
+
 const capitalize = (str) => {
   if (!str) return ''
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()

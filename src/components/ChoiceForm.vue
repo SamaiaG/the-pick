@@ -72,7 +72,7 @@
   </div>
 
   <OptionOverlay v-if="isOptionOverlayVisible" :fields="cardFields[activeCard]" :cardIndex="activeCard" @close="closeOverlay"  @save="saveCardFields"/>
-  <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="makeChoice">
+  <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="handleMakeChoice">
     <BaseButton @click="handleMakeChoice" class="make-choice">Yes I am</BaseButton>
     <BaseButton @click="closeOverlay" class="make-choice">No, I want to make some changes</BaseButton>
   </ConfirmAction>
