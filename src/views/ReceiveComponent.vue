@@ -30,7 +30,7 @@
     </div>
     
     <div class="option-cards mb-3 d-flex wrap justify-content-center gap-3">
-      <OptionCard class="card1" imageSrc="@/assets/card1.jpg" altText="card1" title="1" @cardSelected="handleCardSelection"/>
+      <OptionCard class="card1" imageSrc="cards/card1.jpg" altText="card1" title="1" @cardSelected="handleCardSelection"/>
       <OptionCard class="card2" imageSrc="cards/card2.jpg" altText="card2" title="2" @cardSelected="handleCardSelection" />
       <OptionCard v-if="formData && formData.cardNumber >= 3" class="card3" imageSrc="cards/card3.jpg" altText="card3" title="3" @cardSelected="handleCardSelection" />
     </div>
