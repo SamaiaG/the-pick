@@ -156,7 +156,7 @@ const handleMakeChoice = () => {
   }));
 
   // Construct the URL with the serialized data as a query parameter
-  const baseUrl = import.meta.env.BASE_URL; // Assuming you are using Vite
+  const baseUrl = import.meta.env.BASE_URL; 
   const link = `${baseUrl}receive/?data=${serializedData}`;
 
   generatedLink.value = link;

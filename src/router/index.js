@@ -5,7 +5,7 @@ import ReceiveComponent from '../views/ReceiveComponent.vue'
 import PathNotFound from '../views/PathNotFound.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/the-pick/'),
   routes: [
     {
       path: '/',
@@ -13,7 +13,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/receive',
+      path: '/receive/',
       name: 'receive',
       component: ReceiveComponent
     },
