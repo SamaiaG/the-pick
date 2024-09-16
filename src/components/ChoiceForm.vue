@@ -85,19 +85,15 @@ import BaseButton from './BaseButton.vue';
 import OptionOverlay from '../views/OptionOverlay.vue';
 import ConfirmAction from '../components/ConfirmAction.vue';
 
+// Card and user options
 const cardOptions = [2, 3];
 const userOptions = ['ME', 'SOMEONE ELSE'];
 
+// Reactive references
 const activeCard = ref(null);
 const isOptionOverlayVisible = ref(false);
 const isConfirmActionVisible = ref(false);
-
-const cardFields = ref([
-  { what: [], where: [], more: [] },
-  { what: [], where: [], more: [] },
-  { what: [], where: [], more: [] }
-])
-
+const cardFields = ref([{ what: [], where: [], more: [] }, { what: [], where: [], more: [] }, { what: [], where: [], more: [] }]);
 const formData = ref({
   name: '',
   decisionType: '',
@@ -106,12 +102,12 @@ const formData = ref({
   cardNumber: 2,
   cardOptions: cardFields.value,
   decidingUser: 'ME',
-  decidingUserName:'',
+  decidingUserName: '',
   decidingUserEmail: ''
 });
-
 const generatedLink = ref('');
 
+// Event Handlers
 const updateDecisionType = (event) => {
   formData.value.decisionType = event.target.value;
 };
@@ -139,30 +135,31 @@ const closeOverlay = () => {
 };
 
 const saveCardFields = (data) => {
-  const {cardIndex, fields} = data;
+  const { cardIndex, fields } = data;
   cardFields.value[cardIndex] = fields;
 };
 
 const shuffleCards = () => {
-  const shuffledCards = [...cardFields.value]
+  const shuffledCards = [...cardFields.value];
   for (let i = shuffledCards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
   }
-  return shuffledCards
-}
-const handleMakeChoice = () => {
-  const shuffleCardsFields = shuffleCards()
-  const shuffledFormData = {
-    ...formData.value,
-    cardFields: shuffleCardsFields
-  }
+  return shuffledCards;
+};
 
-  const serializedData = encodeURIComponent(JSON.stringify(shuffledFormData));
-  
-  const baseUrl = import.meta.env.BASE_URL || '/the-pick/';
-  const path = 'receive/';
-  const link = `${baseUrl}${path}?data=${serializedData}`;
+const handleMakeChoice = () => {
+  // Serialize the form data and card fields
+  const serializedData = encodeURIComponent(JSON.stringify({
+    ...formData.value,
+    cardFields: shuffleCards()
+  }));
+
+  // Construct the URL with the serialized data as a query parameter
+  const baseUrl = import.meta.env.BASE_URL; // Assuming you are using Vite
+  const link = `${baseUrl}receive/?data=${serializedData}`;
+
+  generatedLink.value = link;
 
   window.location.href = link;
 };

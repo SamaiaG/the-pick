@@ -30,9 +30,9 @@
     </div>
     
     <div class="option-cards mb-3 d-flex wrap justify-content-center gap-3">
-      <OptionCard class="card1" imageSrc="src/assets/card1.jpg" altText="card1" title="1" @cardSelected="handleCardSelection"/>
-      <OptionCard class="card2" imageSrc="src/assets/card2.jpg" altText="card2" title="2" @cardSelected="handleCardSelection" />
-      <OptionCard v-if="formData && formData.cardNumber >= 3" class="card3" imageSrc="src/assets/card3.jpg" altText="card3" title="3" @cardSelected="handleCardSelection" />
+      <OptionCard class="card1" imageSrc="@/assets/card1.jpg" altText="card1" title="1" @cardSelected="handleCardSelection"/>
+      <OptionCard class="card2" imageSrc="cards/card2.jpg" altText="card2" title="2" @cardSelected="handleCardSelection" />
+      <OptionCard v-if="formData && formData.cardNumber >= 3" class="card3" imageSrc="cards/card3.jpg" altText="card3" title="3" @cardSelected="handleCardSelection" />
     </div>
     
     <p v-if="selectedCard" class="received-p">You've selected the <span class="cn">card number {{selectedCard}}</span>! Good choice!</p>
@@ -58,7 +58,7 @@
     <h4 class="end-message">Thank you for using this tool. I hope I could make your life a little bit easier! </h4>
 
   </BaseOverlay>
-  <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="makeChoice">
+  <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay">
     <BaseButton @click="selectedVisible" class="confirm">Yes I am</BaseButton>
     <BaseButton @click="closeConfirmChoice" class="confirm">No, I want to make some changes</BaseButton>
   </ConfirmAction>
@@ -114,13 +114,6 @@ const selectedVisible = () => {
     isSecondSectionVisible.value = false;
 }
 
-const makeChoice = () => {
-  // This is the missing method that was referenced in the warning
-  // Here you can handle logic such as sending the selected card to a server
-  console.log("Choice confirmed with card number: ", selectedCard.value);
-  selectedVisible(); // Show the selected card
-}
-
 const capitalize = (str) => {
   if (!str) return ''
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
@@ -140,8 +133,6 @@ onMounted(() => {
       } else {
         formData.value = parsedData;
       }
-
-      // ... rest of your existing code ...
     } catch (error) {
       console.error('Error parsing data:', error);
       formData.value = { cardNumber: 2 }; 
