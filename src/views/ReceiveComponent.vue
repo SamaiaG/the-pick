@@ -67,14 +67,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import TheSection from '@/components/TheSection.vue';
 import OptionCard from '@/components/OptionCard.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseOverlay from '@/components/BaseOverlay.vue';
 import ConfirmAction from '@/components/ConfirmAction.vue';
 
-const route = useRoute();
 
 const formData = ref(null);
 const cardFields = ref([]);
@@ -124,7 +122,8 @@ const capitalize = (str) => {
 
 
 onMounted(() => {
-  const dataParam = route.query.data;
+  const dataParam = new URLSearchParams(window.location.search).get('data');
+  
   if (dataParam) {
     try {
       const parsedData = JSON.parse(decodeURIComponent(dataParam));
