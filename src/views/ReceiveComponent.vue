@@ -47,6 +47,7 @@
 
   <BaseOverlay v-show="isSelectedVisible" @close="closeOverlay">
     <h3 class="reveal-title">Congrats, you've made your choice!</h3>
+
     <div v-if="selectedCard && cardFields[selectedCard - 1]" class="card-reveal">
       <div v-for="(category, key) in cardFields[selectedCard - 1]" :key="key">
         <h4 class="reveal-category">{{ capitalize(key) }}..?</h4>
@@ -54,7 +55,11 @@
           <li v-for="(item, index) in category" :key="index" class="reveal-item">{{ item }}</li>
         </ul>
       </div>
+      <div v-if="cardFields[selectedCard - 1].image" class="image-container">
+    <img :src="cardFields[selectedCard - 1].image" alt="Uploaded Image" class="uploaded-image"/>
+  </div>
     </div>
+
     <h4 class="end-message">Thank you for using this tool. I hope I could make your life a little bit easier! </h4>
 
   </BaseOverlay>
@@ -208,7 +213,16 @@ onMounted(() => {
   font-weight: 400;
   margin: 1vmin 0;
 }
+.image-container {
+  text-align: center;
+  margin-top: 2vmin;
+}
 
+.uploaded-image {
+  max-width: 100%;
+  max-height: 300px; /* Adjust as needed */
+  object-fit: cover;
+}
 .end-message, .reveal-title{
   font-size: 2.5vmin;
   font-weight: 300;

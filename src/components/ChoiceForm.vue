@@ -71,7 +71,14 @@
     <p v-if="generatedLink">Share this link: <a :href="generatedLink">{{ generatedLink }}</a></p>
   </div>
 
-  <OptionOverlay v-if="isOptionOverlayVisible" :fields="cardFields[activeCard]" :cardIndex="activeCard" @close="closeOverlay"  @save="saveCardFields"/>
+<BaseOverlay v-if="isOptionOverlayVisible"  @close="closeOverlay"  >
+  <OptionOverlay 
+  :fields="cardFields[activeCard]" 
+  :cardIndex="activeCard" 
+  @save="saveCardFields"
+   @close="closeOverlay"
+/></BaseOverlay>
+
   <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="handleMakeChoice">
     <BaseButton @click="handleMakeChoice" class="make-choice">Yes I am</BaseButton>
     <BaseButton @click="closeOverlay" class="make-choice">No, I want to make some changes</BaseButton>
@@ -82,6 +89,7 @@
 import { ref } from 'vue';
 import OptionCard from './OptionCard.vue';
 import BaseButton from './BaseButton.vue';
+import BaseOverlay from './BaseOverlay.vue';
 import OptionOverlay from '../views/OptionOverlay.vue';
 import ConfirmAction from '../components/ConfirmAction.vue';
 
@@ -93,7 +101,9 @@ const userOptions = ['ME', 'SOMEONE ELSE'];
 const activeCard = ref(null);
 const isOptionOverlayVisible = ref(false);
 const isConfirmActionVisible = ref(false);
-const cardFields = ref([{ what: [], where: [], more: [] }, { what: [], where: [], more: [] }, { what: [], where: [], more: [] }]);
+
+const cardFields = ref([{ what: [], image: null }, { what: [], image: null }, { what: [], image: null }]);
+
 const formData = ref({
   name: '',
   decisionType: '',
@@ -107,7 +117,6 @@ const formData = ref({
 });
 const generatedLink = ref('');
 
-// Event Handlers
 const updateDecisionType = (event) => {
   formData.value.decisionType = event.target.value;
 };
@@ -121,22 +130,23 @@ const setActiveUser = (user) => {
 };
 
 const openOverlay = (cardIndex) => {
+  console.log("Opening overlay for card:", cardIndex);
   activeCard.value = cardIndex - 1;
   isOptionOverlayVisible.value = true;
 };
-
 const openConfirmAction = () => {
   isConfirmActionVisible.value = true;
 };
 
 const closeOverlay = () => {
+  console.log("Closing overlay");
   isOptionOverlayVisible.value = false;
   isConfirmActionVisible.value = false;
 };
 
 const saveCardFields = (data) => {
   const { cardIndex, fields } = data;
-  cardFields.value[cardIndex] = fields;
+  cardFields.value[cardIndex] = fields; 
 };
 
 const shuffleCards = () => {
