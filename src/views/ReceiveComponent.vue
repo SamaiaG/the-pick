@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
   <TheSection class="receive-section">  
     <div class="hero-receive">
       <div v-if="formData">
@@ -29,7 +29,7 @@
       </p>
     </div>
     
-    <div class="option-cards mb-3 d-flex wrap justify-content-center gap-3">
+    <div class="option-cards d-flex wrap justify-content-center">
       <OptionCard class="card1" imageSrc="cards/card1.jpg" altText="card1" title="1" @cardSelected="handleCardSelection"/>
       <OptionCard class="card2" imageSrc="cards/card2.jpg" altText="card2" title="2" @cardSelected="handleCardSelection" />
       <OptionCard v-if="formData && formData.cardNumber >= 3" class="card3" imageSrc="cards/card3.jpg" altText="card3" title="3" @cardSelected="handleCardSelection" />
@@ -152,6 +152,10 @@ onMounted(() => {
 
   
 <style scoped>
+:deep(.second-section>.s-container){
+  height: auto;
+    padding: 8vmin 16vmin;
+}
   .receive-section{
     background-image: url(../assets/hero2.jpg);
     background-repeat: no-repeat;
@@ -182,6 +186,7 @@ onMounted(() => {
   background-color: transparent;
   color: #174218;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  font-size: 2vmin!important;
 }
 .confirm:hover{
   background-color: #174218;
@@ -192,6 +197,7 @@ onMounted(() => {
   color: #174218;
   text-decoration: underline;
 }
+
 .card-reveal {
   display: flex;
   justify-content: space-around;
@@ -220,7 +226,7 @@ onMounted(() => {
 
 .uploaded-image {
   max-width: 100%;
-  max-height: 300px; /* Adjust as needed */
+  max-height: 300px; 
   object-fit: cover;
 }
 .end-message, .reveal-title{
@@ -233,6 +239,9 @@ onMounted(() => {
   .end-message{
     margin-top: 2.5vmin;
   }
+  .option-cards{
+  gap: 3vmin
+}
 
   @media (max-width: 768px) {
     .hero-receive{
@@ -240,12 +249,25 @@ onMounted(() => {
       flex-direction: column;
       align-items: center;
     }
-    .hero-p{
+    .hero-title,.hero-p{
       text-align: center;
     }
-    :deep(.second-section > .s-container){
-  padding:  8vmin 4vmin;
+    .confirm{
+      font-size: 12px!important;
+    }
+    .option-cards {
+  flex-direction: column;
+  gap: 0
 }
+.card-button{
+  width: 100%;
+  height: 20vh;
+}
+.cards, .deciding-user{
+  flex-direction: column !important;
+  gap: 2vmin
+}
+
   }
 </style>
   

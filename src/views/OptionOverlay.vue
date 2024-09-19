@@ -4,7 +4,7 @@
         <div class="sec">
           <div class="input-fields">
             <!-- Text input fields -->
-              <input v-model="localFields.what[cardIndex]" type="text" class="form-control idea" :id="'whatInput' + cardIndex" placeholder="option">
+              <input v-model="localFields.what[cardIndex]" type="text" class="form-control idea" :id="'whatInput' + cardIndex" placeholder="Your idea here">
           </div>
 
           <!-- Image upload option -->
@@ -110,8 +110,8 @@ const saveFields = () => {
 
 .image-preview {
   margin-top: 1vmin;
-  max-width: 100%;
-  max-height: 15vmin;
+  width: 10vmin;
+  height: 10vmin;
   object-fit: cover;
 }
 

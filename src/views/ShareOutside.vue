@@ -4,32 +4,32 @@
         <div class="share-links">
             <ShareNetwork
             network="facebook"
-            url="https://news.vuejs.org/issues/180"
+            url="https://samaiag.github.io/the-pick/"
             title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
             description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
             quote="The hot reload is so fast it\'s near instant. - Evan You"
-            hashtags="vuejs,vite"
+            hashtags="thepick"
             >
            <img src="../assets/facebook_icon.svg" alt="Share on Facebook" class="social-icon"/>   
             </ShareNetwork>
             <ShareNetwork
             network="twitter"
-            url="https://news.vuejs.org/issues/180"
+            url="https://samaiag.github.io/the-pick/"
             title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
             description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
             quote="The hot reload is so fast it\'s near instant. - Evan You"
-            hashtags="vuejs,vite"
+            hashtags="thepick"
             >
             <img src="../assets/instagram_icon.svg" alt="Share on Facebook" class="social-icon"/>  
             <!-- have to custom this link -->
             </ShareNetwork>
             <ShareNetwork
             network="linkedin"
-            url="https://news.vuejs.org/issues/180"
+            url="https://samaiag.github.io/the-pick/"
             title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
             description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
             quote="The hot reload is so fast it\'s near instant. - Evan You"
-            hashtags="vuejs,vite"
+            hashtags="thepick"
             >
             <img src="../assets/linkedin_icon.svg" alt="Share on Facebook" class="social-icon"/>   
 
@@ -47,7 +47,7 @@ import {ref} from 'vue'
 const copyDone = ref(false)
 
 const copyLink = () => {
-    const url = 'http://localhost:5173/'
+    const url = 'https://samaiag.github.io/the-pick/'
     navigator.clipboard.writeText(url).then(() => {
         copyDone.value = true
         setTimeout(() => {
@@ -83,5 +83,12 @@ const copyLink = () => {
 .social-icon{
     width: 5vmin;
     height: 5vmin;
+}
+
+@media (max-width: 1024px) {
+    .social-icon{
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>

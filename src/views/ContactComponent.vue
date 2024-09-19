@@ -29,10 +29,10 @@
         </div>
     </div>
      <div class="other-methods mt-5">
-            <a href="https://github.com/Abdulrhman-Elkady">
+            <a href="https://www.linkedin.com/in/samaia-gahramanov-569343232/">
                 <img src="../assets/linkedin_icon.svg" alt="contact" class="contact_link">
             </a>
-            <a class="gmail" href="mailto:Abdulrhman-Elkady?subject=Hello">
+            <a class="gmail" href="mailto:samaiagahramanov@gmail.com">
                 <img src="../assets/gmail_icon.svg" alt="contact" class="contact_link">
             </a>
             
@@ -124,6 +124,7 @@
      border-radius: 1vmin;
  }
 .right-part{
+    display: flex;
     width: 30%;}
  .name {
     display: flex;
@@ -144,10 +145,20 @@
     align-items: center;
     justify-content: center;
  }
- .contact-link{
-    width: 50px;
-    height: 50px;
+ .contact_link{
+    width: 5vmin;
+    height: 5vmin;
     cursor: pointer;
+ }
+
+ @media (max-width: 1024px) {
+  .right-part{
+    display: none;
+  }
+  .contact_link{
+    width: 40px;
+    height: 40px;
+  }
  }
  
  </style>

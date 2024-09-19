@@ -172,8 +172,6 @@ const handleMakeChoice = () => {
 };
 </script>
 
-
-
 <style scoped>
 .container{
   display: flex;
@@ -187,17 +185,6 @@ const handleMakeChoice = () => {
 
 .deciding-user, .cards{
   width: 100%;
-}
-.make-choice{
-  background-color: transparent;
-  color: #174218;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
-}
-.make-choice:hover{
-  background-color: #174218;
-  color: white;
-  cursor: pointer;
 }
 .option-cards{
   gap: 3vmin
@@ -216,7 +203,6 @@ const handleMakeChoice = () => {
   background-color: var(--secondary-color);
   color: white;
   transition: 0.5s;
-
 }
 .btn-active {
   background-color: var(--secondary-color);
@@ -227,6 +213,17 @@ label, .form-select{
 }
 .option{
   font-size: 12px;
+}
+.make-choice{
+  background-color: transparent;
+  color: #174218;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  font-size: 2vmin!important;
+}
+.make-choice:hover{
+  background-color: #174218;
+  color: white;
+  cursor: pointer;
 }
 @media (max-width: 768px) {
 .btn{
@@ -254,7 +251,7 @@ p{
   text-align: center;
 }
 .make-choice{
-  font-size: 18px;
+  font-size: 12px!important;
 }
 label, .form-select{
   font-size: 2.5vmin;
