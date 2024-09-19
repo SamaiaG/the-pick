@@ -15,9 +15,10 @@
         </div>
       </div>
     </div>
+    <ArrowComponent @scrollToSection="scrollToSecondSection" />
   </TheSection>
 
-  <TheSection class="second-section" v-show="isSecondSectionVisible">
+  <TheSection class="second-section" v-show="isSecondSectionVisible" ref="secondSection">
     <div v-if="formData">
       <p v-if="formData.decidingUser === 'ME'" class="received-p">
         Below you see {{ formData.cardNumber }} cards you completed with different options.<br>
@@ -77,7 +78,7 @@ import OptionCard from '@/components/OptionCard.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import BaseOverlay from '@/components/BaseOverlay.vue';
 import ConfirmAction from '@/components/ConfirmAction.vue';
-
+import ArrowComponent from '@/components/ArrowComponent.vue';
 
 const formData = ref(null);
 const cardFields = ref([]);
@@ -100,6 +101,8 @@ const specialPersonOptions = {
   '3': 'A work buddy',
   '4': 'Someone else'
 };
+
+const secondSection = ref(null);
 
 const handleCardSelection = (cardNumber) => {
   selectedCard.value = cardNumber;
@@ -125,6 +128,14 @@ const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 }
 
+const scrollToSecondSection = () => {
+  const sectionElement = secondSection.value?.$el || secondSection.value // Access the actual DOM element
+  if (sectionElement) {
+    sectionElement.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    console.error('Second section not found')
+  }
+}
 
 onMounted(() => {
   const dataParam = new URLSearchParams(window.location.search).get('data');

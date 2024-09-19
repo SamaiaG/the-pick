@@ -10,9 +10,10 @@
         <BaseButton class="find" @click="findMoreOverlay">Find more about how it works</BaseButton>
         <BaseButton class="share" @click="shareOutsideOverlay">Share it with your frinds</BaseButton>
       </div>  
-    </div>  
+    </div>
+    <ArrowComponent @scrollToSection="scrollToSecondSection" />  
   </TheSection>
-  <TheSection class="second-section">
+  <TheSection class="second-section" ref="secondSection">
       <ChoiceForm />
   </TheSection>
 
@@ -26,16 +27,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import TheSection from '../components/TheSection.vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseOverlay from '@/components/BaseOverlay.vue'
 import ChoiceForm from '../components/ChoiceForm.vue'
 import FindMore from './FindMore.vue'
 import ShareOutside from './ShareOutside.vue'
+import ArrowComponent from '@/components/ArrowComponent.vue'
 
 const isFindMoreVisible = ref(false)
 const isShareOutsideVisible = ref(false)
+
+const secondSection = ref(null)
 
 const findMoreOverlay = () => {
   isFindMoreVisible.value = true
@@ -50,8 +54,16 @@ const closeOverlay = () => {
   isShareOutsideVisible.value = false
 }
 
-
+const scrollToSecondSection = () => {
+  const sectionElement = secondSection.value?.$el || secondSection.value // Access the actual DOM element
+  if (sectionElement) {
+    sectionElement.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    console.error('Second section not found')
+  }
+}
 </script>
+
 
 <style scoped>
 .hero-section{
