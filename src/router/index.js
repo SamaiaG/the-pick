@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import ReceiveComponent from '../views/ReceiveComponent.vue'
@@ -7,7 +7,7 @@ import PathNotFound from '../views/PathNotFound.vue'
 const base = import.meta.env.BASE_URL || '/the-pick/'
 
 const router = createRouter({
-  history: createWebHashHistory(base),
+  history: createWebHistory(base),
   routes: [
     {
       path: '/',
