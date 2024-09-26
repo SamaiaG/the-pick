@@ -87,11 +87,18 @@
 
 <script setup>
 import { ref } from 'vue';
+import {useRouter} from 'vue-router'
 import OptionCard from './OptionCard.vue';
 import BaseButton from './BaseButton.vue';
 import BaseOverlay from './BaseOverlay.vue';
 import OptionOverlay from '../views/OptionOverlay.vue';
 import ConfirmAction from '../components/ConfirmAction.vue';
+
+import { useFormStore } from '@/stores/useFormStore';
+
+const router = useRouter();
+const formStore = useFormStore();
+const formData = ref(formStore.formData); 
 
 // Card and user options
 const cardOptions = [2, 3];
@@ -104,17 +111,6 @@ const isConfirmActionVisible = ref(false);
 
 const cardFields = ref([{ what: [], image: null }, { what: [], image: null }, { what: [], image: null }]);
 
-const formData = ref({
-  name: '',
-  decisionType: '',
-  specialPerson: '',
-  personName: '',
-  cardNumber: 2,
-  cardOptions: cardFields.value,
-  decidingUser: 'ME',
-  decidingUserName: '',
-  decidingUserEmail: ''
-});
 const generatedLink = ref('');
 
 const updateDecisionType = (event) => {
@@ -159,22 +155,16 @@ const shuffleCards = () => {
 };
 
 const handleMakeChoice = () => {
+  // Instead of creating a link, just save data to the store
   const shuffleCardsFields = shuffleCards(); // Shuffle the card fields
 
-  const shuffledFormData = {
+  formStore.setFormData({
     ...formData.value,
     cardFields: shuffleCardsFields // Include the shuffled card fields
-  };
+  });
 
-  // Serialize the form data and encode it for the URL
-  const serializedData = encodeURIComponent(JSON.stringify(shuffledFormData));
-  const baseUrl = import.meta.env.BASE_URL;
-  
-  // Create a URL with the serialized data as a query parameter
-  const link = `${baseUrl}receive?data=${serializedData}`;
-
-  // Redirect to the receive component with the form data in the URL
-  window.location.href = link;
+  // Navigate to the next component (use your router to redirect)
+  router.push({ name: 'receive' }); // Adjust with your actual route name
 };
 </script>
 

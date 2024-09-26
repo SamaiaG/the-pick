@@ -80,27 +80,16 @@ import BaseOverlay from '@/components/BaseOverlay.vue';
 import ConfirmAction from '@/components/ConfirmAction.vue';
 import ArrowComponent from '@/components/ArrowComponent.vue';
 
-const formData = ref(null);
+import { useFormStore } from '@/stores/useFormStore';
+
+const formStore = useFormStore();
+const formData = ref(formStore.formData); // Initialize formData here
 const cardFields = ref([]);
-const decisionTypeText = ref('');
-const specialPersonText = ref('');
 const selectedCard = ref('');
+
 const isSelectedVisible = ref(false);
 const isConfirmActionVisible = ref(false);
 const isSecondSectionVisible = ref(true);
-
-const decisionTypeOptions = {
-  '1': 'I have to make a personal decision.',
-  '2': "It's someone's birthday (or other party).",
-  '3': 'To be or not to be?!'
-};
-
-const specialPersonOptions = {
-  '1': 'Wife/Husband',
-  '2': 'A friend',
-  '3': 'A work buddy',
-  '4': 'Someone else'
-};
 
 const secondSection = ref(null);
 
@@ -110,59 +99,38 @@ const handleCardSelection = (cardNumber) => {
 
 const closeOverlay = () => {
   isSelectedVisible.value = false;
-}
+};
 const openConfirmAction = () => {
   isConfirmActionVisible.value = true;
 };
 const closeConfirmChoice = () => {
   isConfirmActionVisible.value = false;
-}
+};
 const selectedVisible = () => {
-  closeConfirmChoice()
-    isSelectedVisible.value = true;
-    isSecondSectionVisible.value = false;
-}
+  closeConfirmChoice();
+  isSelectedVisible.value = true;
+  isSecondSectionVisible.value = false;
+};
 
 const capitalize = (str) => {
-  if (!str) return ''
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
-}
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
 
 const scrollToSecondSection = () => {
-  const sectionElement = secondSection.value?.$el || secondSection.value // Access the actual DOM element
+  const sectionElement = secondSection.value?.$el || secondSection.value; // Access the actual DOM element
   if (sectionElement) {
-    sectionElement.scrollIntoView({ behavior: 'smooth' })
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
   } else {
-    console.error('Second section not found')
+    console.error('Second section not found');
   }
-}
+};
 
 onMounted(() => {
-  const dataParam = new URLSearchParams(window.location.search).get('data'); // Get the 'data' parameter from URL
-  
-  if (dataParam) {
-    try {
-      const parsedData = JSON.parse(decodeURIComponent(dataParam)); // Decode and parse the data from URL
-      
-      if (parsedData.cardFields) {
-        // Set the card fields data
-        cardFields.value = parsedData.cardFields;
-        const { cardFields: _, ...restData } = parsedData;
-        
-        // Set the remaining form data
-        formData.value = restData;
-      } else {
-        formData.value = parsedData;
-      }
-    } catch (error) {
-      console.error('Error parsing data:', error);
-      formData.value = { cardNumber: 2 }; // Fallback if parsing fails
-    }
-  } else {
-    formData.value = { cardNumber: 2 }; // Default if no data found in URL
-  }
+  cardFields.value = formStore.formData.cardFields; // Assuming cardFields are part of formData
 });
 </script>
+
 
   
 <style scoped>

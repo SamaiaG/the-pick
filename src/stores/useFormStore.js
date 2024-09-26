@@ -16,7 +16,7 @@ export const useFormStore = defineStore('formStore', {
   }),
   actions: {
     setFormData(data) {
-      this.formData = data;
+      this.formData = { ...this.formData, ...data }; 
     },
     updateField(field, value) {
       this.formData[field] = value;
