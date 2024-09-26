@@ -1,7 +1,3 @@
-<script setup>
-import BaseOverlay from '../components/BaseOverlay.vue'
-</script>
-
 <template>
     <div class="confirm">
     <BaseOverlay>
@@ -14,6 +10,10 @@ import BaseOverlay from '../components/BaseOverlay.vue'
     </BaseOverlay>
 </div>
 </template>
+
+<script setup>
+import BaseOverlay from '../components/BaseOverlay.vue'
+</script>
 
 <style scoped> 
 .confirm-action{

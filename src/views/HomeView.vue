@@ -55,7 +55,7 @@ const closeOverlay = () => {
 }
 
 const scrollToSecondSection = () => {
-  const sectionElement = secondSection.value?.$el || secondSection.value // Access the actual DOM element
+  const sectionElement = secondSection.value?.$el || secondSection.value 
   if (sectionElement) {
     sectionElement.scrollIntoView({ behavior: 'smooth' })
   } else {

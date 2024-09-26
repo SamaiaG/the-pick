@@ -159,15 +159,21 @@ const shuffleCards = () => {
 };
 
 const handleMakeChoice = () => {
-  const shuffleCardsFields = shuffleCards();
+  const shuffleCardsFields = shuffleCards(); // Shuffle the card fields
+
   const shuffledFormData = {
     ...formData.value,
-    cardFields: shuffleCardsFields
+    cardFields: shuffleCardsFields // Include the shuffled card fields
   };
 
+  // Serialize the form data and encode it for the URL
   const serializedData = encodeURIComponent(JSON.stringify(shuffledFormData));
   const baseUrl = import.meta.env.BASE_URL;
+  
+  // Create a URL with the serialized data as a query parameter
   const link = `${baseUrl}receive?data=${serializedData}`;
+
+  // Redirect to the receive component with the form data in the URL
   window.location.href = link;
 };
 </script>

@@ -138,25 +138,28 @@ const scrollToSecondSection = () => {
 }
 
 onMounted(() => {
-  const dataParam = new URLSearchParams(window.location.search).get('data');
+  const dataParam = new URLSearchParams(window.location.search).get('data'); // Get the 'data' parameter from URL
   
   if (dataParam) {
     try {
-      const parsedData = JSON.parse(decodeURIComponent(dataParam));
+      const parsedData = JSON.parse(decodeURIComponent(dataParam)); // Decode and parse the data from URL
       
       if (parsedData.cardFields) {
+        // Set the card fields data
         cardFields.value = parsedData.cardFields;
         const { cardFields: _, ...restData } = parsedData;
+        
+        // Set the remaining form data
         formData.value = restData;
       } else {
         formData.value = parsedData;
       }
     } catch (error) {
       console.error('Error parsing data:', error);
-      formData.value = { cardNumber: 2 };
+      formData.value = { cardNumber: 2 }; // Fallback if parsing fails
     }
   } else {
-    formData.value = { cardNumber: 2 };
+    formData.value = { cardNumber: 2 }; // Default if no data found in URL
   }
 });
 </script>
