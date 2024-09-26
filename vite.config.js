@@ -1,5 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -8,10 +7,10 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  base: '/the-pick/',
-   resolve: {
+  base: process.env.NODE_ENV === 'production' ? '/the-pick/' : '/', // Adjust base path based on environment
+  resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  } 
+  }
 })
