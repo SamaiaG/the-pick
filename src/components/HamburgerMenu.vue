@@ -1,12 +1,8 @@
 <template>
     <div class="hamburger-menu">
-        <RouterLink to="/" class="h-link"  @click="findMoreOverlay" >About</RouterLink>
         <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
-        <RouterLink to="/" class="h-link"  @click="shareOutsideOverlay">Share it now</RouterLink>
     </div>
     <div>
-    <ShareOutside class="share-outside" v-show="isShareOutsideVisible"  @close="closeOverlay"/>
-    <FindMore class="find-more" v-show="isFindMoreVisible"  @close="closeOverlay"/>
     <ContactComponent class="contact-component" v-show="isContactOverlayVisible"  @close="closeOverlay"/>
 </div>
 </template>
@@ -19,14 +15,12 @@ const props = defineProps({
 
 <style scoped>
 .hamburger-menu {
-    display: none;
+    display: flex;
     flex-direction: column;
-    position: absolute;
-    background-color: rgb(9 8 15); 
+    background-color: rgb(3, 2, 4); 
     box-shadow: rgba(17, 12, 46, 0.45) 0px 48px 100px 0px;
-    width: 100%;
-    top: 9vmin;
-    left: 0;
+    width: calc(100vw - 25px);
+    height: 100vh;
 }
 .h-link{
     text-decoration: none;
@@ -36,6 +30,7 @@ const props = defineProps({
     font-size: 18px;
     cursor: pointer;
     padding: 14px 5vmin;
+    text-align: center;
 }
 .h-link:hover{
     color: rgb(9 8 15);

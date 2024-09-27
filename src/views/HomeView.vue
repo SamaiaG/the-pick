@@ -8,7 +8,7 @@
       </div>
       <div class="hero-buttons">
         <BaseButton class="find" @click="findMoreOverlay">Find more about how it works</BaseButton>
-        <BaseButton class="share" @click="shareOutsideOverlay">Share it with your frinds</BaseButton>
+        <BaseButton class="share" @click="shareOutsideOverlay">Share it with your friends</BaseButton>
       </div>  
     </div>
     <ArrowComponent @scrollToSection="scrollToSecondSection" />  

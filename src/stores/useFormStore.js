@@ -5,13 +5,12 @@ export const useFormStore = defineStore('formStore', {
     formData: {
       name: '',
       decisionType: '',
-      specialPerson: '',
-      personName: '',
+      partyType: '',
       cardNumber: 2,
       cardFields: [{ what: [], image: null }, { what: [], image: null }, { what: [], image: null }],
       decidingUser: 'ME',
       decidingUserName: '',
-      decidingUserEmail: ''
+      userEmail: ''
     }
   }),
   actions: {

@@ -2,22 +2,13 @@
     <header>
       <div class="h-container">
         <RouterLink to="/" class="h-link"> <img src="../assets/logo.png" alt="logo" id="logo"></RouterLink>
-        <nav class="nav">
-          <RouterLink to="/" class="h-link"  @click="findMoreOverlay" >About</RouterLink>
+        <BaseButton class="contact-button">
           <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
-          <RouterLink to="/" class="h-link"  @click="shareOutsideOverlay">Share it now</RouterLink>
-        </nav>
+        </BaseButton>
         <div class="hamburger" :class="{ 'is-open': isHamOpen }" @click="toggleHam"></div>
       </div>
       <HamburgerMenu class="hamburger-menu" v-if="isHamOpen" :closeHam="toggleHam" />
 
-
-<BaseOverlay v-if="isFindMoreVisible"  @close="closeOverlay">
-  <FindMore class="find-more" />
-</BaseOverlay>
-<BaseOverlay v-if="isShareOutsideVisible"  @close="closeOverlay">
-  <ShareOutside class="share-outside"/>
-</BaseOverlay>
 <BaseOverlay v-if="isContactOverlayVisible"  @close="closeOverlay">
   <ContactComponent class="contact-component" />
 </BaseOverlay>
@@ -25,37 +16,31 @@
 </template>
 
 <script setup>
-import FindMore from '../views/FindMore.vue'
 import ContactComponent from '../views/ContactComponent.vue'
-import ShareOutside from '../views/ShareOutside.vue'
 import HamburgerMenu from '../components/HamburgerMenu.vue'
 import BaseOverlay from './BaseOverlay.vue'
+import BaseButton from './BaseButton.vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const isFindMoreVisible = ref(false)
-const isShareOutsideVisible = ref(false)
 const isContactOverlayVisible = ref(false)
 
-const findMoreOverlay = () => {
-  isFindMoreVisible.value = true
-}
-
-const shareOutsideOverlay = () => {
-  isShareOutsideVisible.value = true
-}
 const contactOverlay = () => {
   isContactOverlayVisible.value = true
 }
 
 const closeOverlay = () => {
-  isFindMoreVisible.value = false
-  isShareOutsideVisible.value = false
   isContactOverlayVisible.value = false
 }
 const isHamOpen = ref(false);
 
 function toggleHam() {
   isHamOpen.value = !isHamOpen.value
+
+  if (isHamOpen.value) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'auto';
+  }
 }
 
 function handleClickOutside(event) {
@@ -78,7 +63,7 @@ onUnmounted(() => {
 <style scoped>
 .h-container{
     display: flex;
-    width: calc(100vw - 4vmin);
+    width: calc(100vw - 25px);
     justify-content: space-between;
     padding: 0 16vmin;
     align-items: center;
@@ -92,16 +77,14 @@ onUnmounted(() => {
     align-items: stretch;
 }
 
-.h-link {
-    padding: 2vmin;
-    text-decoration: none;
-  color: white;
-  transition: 0.4s;
-  font-family: Raleway, sans-serif;
+.contact-button{
+    border: 1px solid white;
+    padding: 1vmin 3vmin;
+    margin: 1.5vmin;
 }
-
-.h-link:hover{
-    background-color: var(--primary-op);
+.contact-button:hover{
+    background-color: #174218;
+    border-color:#174218
 }
 
 .hamburger {
@@ -111,7 +94,6 @@ onUnmounted(() => {
   background-position: center;
   width: 5vmin;
   height: 5vmin;
-  margin-right:1vmin;
   margin: 2vmin;
 }
 
@@ -119,11 +101,12 @@ onUnmounted(() => {
   background-image: url('../assets/xmark-solid.svg');
 }
 .hamburger-menu{
+  display: none;
   position: fixed;
-  top: 9vmin;
+  top: 53px;
   right: 0;
+  z-index: 9999;
 }
-
 
 @media (max-width: 1024px) {
   .h-container{
@@ -133,12 +116,16 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .h-container{
     padding: 0 4vmin;
+    width: calc(100vw - 25px);
   }
   .hamburger{
     display: block;
     cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top:12px;
   }
-  .nav{
+  .contact-button{
     display: none;
   }
 

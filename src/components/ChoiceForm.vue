@@ -1,28 +1,46 @@
 <template>
   <div class="container" @submit.prevent="generateLink">
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" placeholder="name" v-model="formData.name" required>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="floatingInput" 
+        placeholder="name" 
+        v-model="formData.name" 
+        :class="{ 'is-invalid': formErrors.name }" 
+        required
+      >
       <label for="floatingInput">What is your name?</label>
+      <div v-if="formErrors.name" class="invalid-feedback">Please enter your name.</div>
     </div>
-    <select class="form-select decision-type mb-3" aria-label="Default select example" @change="updateDecisionType($event)" v-model="formData.decisionType" required>
+    
+    <select 
+      class="form-select decision-type mb-3" 
+      aria-label="Default select example" 
+      @change="updateDecisionType($event)" 
+      v-model="formData.decisionType" 
+      required
+    >
       <option value="" disabled selected>What are you not sure with?</option>
       <option value="1">I have to make a personal decision.</option>
-      <option value="2">It's someone's birthday (or other party).</option>
-      <option value="3">To be or not to be?!</option>
+      <option value="2">I have to organize a party.</option>
     </select>
+    
     <div class="if-party" v-if="formData.decisionType === '2'">
-      <select class="form-select party-person mb-3" aria-label="Default select example" @change="updateDecisionType($event)" v-model="formData.specialPerson" required>
-        <option value="" disabled selected>Who is this special person for you?</option>
-        <option value="1" class="option">Wife/Husband</option>
-        <option value="2" class="option">A friend</option>
-        <option value="3" class="option">A work buddy</option>
-        <option value="4" class="option">Someone else</option>
+      <select 
+        class="form-select party-type mb-3" 
+        aria-label="Default select example" 
+        v-model="formData.partyType" 
+        required
+      >
+        <option value="" disabled selected>What kind of party do you have to organize?</option>
+        <option value="1">A birthday party</option>
+        <option value="2">A wedding</option>
+        <option value="3">An (any) anniversary</option>
+        <option value="4">Something else</option>
       </select>
-      <div class="form-floating person-name mb-3">
-        <input type="text" class="form-control" id="personNameInput" placeholder="Person's name" v-model="formData.personName" required>
-        <label for="personNameInput">What is her/his name?</label>
-      </div>
     </div>
+    
     <div class="cards mb-3 d-flex justify-content-between align-items-center">
       <p>How many cards do you need?</p>
       <div class="card-number d-flex">
@@ -30,19 +48,42 @@
           v-for="option in cardOptions" 
           :key="option"
           class="btn btn-outline-primary" 
-          :class="{ 'btn-active': formData.cardNumber === option }"
+          :class="{ 'btn-active': formData.cardNumber === option, 'is-invalid': formErrors.cardNumber }"
           @click="setActive(option)"
         >
           {{ option }} cards
         </button>
       </div>
+      <div v-if="formErrors.cardNumber" class="invalid-feedback d-block">Please select the number of cards.</div>
     </div>
+    
     <div class="option-cards d-flex wrap justify-content-center">
-      <OptionCard class="card1" imageSrc="cards/card1.jpg" altText="card1" title="1" @click="openOverlay(1)" />
-      <OptionCard class="card2" imageSrc="cards/card2.jpg" altText="card2" title="2" @click="openOverlay(2)" />
-      <OptionCard class="card3" imageSrc="cards/card3.jpg" altText="card3" title="3" v-if="formData.cardNumber === 3" @click="openOverlay(3)" />
+      <OptionCard 
+        class="card1" 
+        imageSrc="cards/card1.jpg" 
+        altText="card1" 
+        title="1" 
+        @click="openOverlay(1)" 
+      />
+      <OptionCard 
+        class="card2" 
+        imageSrc="cards/card2.jpg" 
+        altText="card2" 
+        title="2" 
+        @click="openOverlay(2)" 
+      />
+      <OptionCard 
+        class="card3" 
+        imageSrc="cards/card3.jpg" 
+        altText="card3" 
+        title="3" 
+        v-if="formData.cardNumber === 3" 
+        @click="openOverlay(3)" 
+      />
     </div>
+    
     <p class="mb-3 align-self-start">Now that you've completed the cards, it's time for the choice to be made!</p>
+    
     <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
       <p>Who will pick the card and make the choice?</p>
       <div class="users d-flex">
@@ -57,28 +98,50 @@
         </button>
       </div>
     </div>
+    
     <div class="se-chooses" v-if="formData.decidingUser === 'SOMEONE ELSE'">
       <div class="form-floating mb-3">
-        <input type="plaintext" class="form-control" id="decidingUserEmail" placeholder="name@example.com" v-model="formData.decidingUserName" required>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="decidingUserName" 
+          placeholder="name@example.com" 
+          v-model="formData.decidingUserName" 
+          :class="{ 'is-invalid': formErrors.decidingUserName }"
+          required
+        >
         <label for="decidingUserName">Now enter the name of the person who will pick the card!</label>
+        <div v-if="formErrors.decidingUserName" class="invalid-feedback">Please enter the name of the person.</div>
       </div>
+      
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="decidingUserEmail" placeholder="name@example.com" v-model="formData.decidingUserEmail" required>
+        <input 
+          type="email" 
+          class="form-control" 
+          id="userEmail" 
+          placeholder="name@example.com" 
+          v-model="formData.userEmail" 
+          :class="{ 'is-invalid': formErrors.userEmail }"
+          required
+        >
         <label for="decidingUserEmail">And your email, to see the picked card content.</label>
+        <div v-if="formErrors.userEmail" class="invalid-feedback">Please enter a valid email address.</div>
       </div>
     </div>
+    
     <BaseButton @click="openConfirmAction" class="make-choice">Make the choice</BaseButton>
-    <p v-if="generatedLink">Share this link: <a :href="generatedLink">{{ generatedLink }}</a></p>
+    <p v-if="generatedLink">Share this link:</p>
   </div>
 
-<BaseOverlay v-if="isOptionOverlayVisible"  @close="closeOverlay"  >
-  <OptionOverlay 
-  :fields="cardFields[activeCard]" 
-  :cardIndex="activeCard" 
-  @save="saveCardFields"
-   @close="closeOverlay"
-/></BaseOverlay>
-
+  <BaseOverlay v-if="isOptionOverlayVisible" @close="closeOverlay">
+    <OptionOverlay 
+      :fields="cardFields[activeCard]" 
+      :cardIndex="activeCard" 
+      @save="saveCardFields" 
+      @close="closeOverlay"
+    />
+  </BaseOverlay>
+  
   <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay" @makeChoice="handleMakeChoice">
     <BaseButton @click="handleMakeChoice" class="make-choice">Yes I am</BaseButton>
     <BaseButton @click="closeOverlay" class="make-choice">No, I want to make some changes</BaseButton>
@@ -87,7 +150,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router';
 import OptionCard from './OptionCard.vue';
 import BaseButton from './BaseButton.vue';
 import BaseOverlay from './BaseOverlay.vue';
@@ -98,7 +161,10 @@ import { useFormStore } from '@/stores/useFormStore';
 
 const router = useRouter();
 const formStore = useFormStore();
-const formData = ref(formStore.formData); 
+const formData = ref(formStore.formData);
+
+// Validation state
+const formErrors = ref({});
 
 // Card and user options
 const cardOptions = [2, 3];
@@ -113,6 +179,10 @@ const cardFields = ref([{ what: [], image: null }, { what: [], image: null }, { 
 
 const generatedLink = ref('');
 
+// Email validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Event handlers
 const updateDecisionType = (event) => {
   formData.value.decisionType = event.target.value;
 };
@@ -130,8 +200,11 @@ const openOverlay = (cardIndex) => {
   activeCard.value = cardIndex - 1;
   isOptionOverlayVisible.value = true;
 };
+
 const openConfirmAction = () => {
-  isConfirmActionVisible.value = true;
+  if (validateForm()) {
+    isConfirmActionVisible.value = true;
+  }
 };
 
 const closeOverlay = () => {
@@ -142,7 +215,7 @@ const closeOverlay = () => {
 
 const saveCardFields = (data) => {
   const { cardIndex, fields } = data;
-  cardFields.value[cardIndex] = fields; 
+  cardFields.value[cardIndex] = fields;
 };
 
 const shuffleCards = () => {
@@ -154,19 +227,42 @@ const shuffleCards = () => {
   return shuffledCards;
 };
 
+// Form validation function
+const validateForm = () => {
+  formErrors.value = {};
+
+  // Validate name
+  if (!formData.value.name) {
+    formErrors.value.name = true;
+  }
+
+
+  // Validate "someone else" fields
+  if (formData.value.decidingUser === 'SOMEONE ELSE') {
+    if (!formData.value.decidingUserName) {
+      formErrors.value.decidingUserName = true;
+    }
+    if (!formData.value.userEmail || !emailRegex.test(formData.value.userEmail)) {
+      formErrors.value.userEmail = true;
+    }
+  }
+
+  return Object.keys(formErrors.value).length === 0;
+};
+
 const handleMakeChoice = () => {
-  // Instead of creating a link, just save data to the store
-  const shuffleCardsFields = shuffleCards(); // Shuffle the card fields
+  const shuffledCardsFields = shuffleCards();
 
   formStore.setFormData({
     ...formData.value,
-    cardFields: shuffleCardsFields // Include the shuffled card fields
+    cardFields: shuffledCardsFields,
   });
 
-  // Navigate to the next component (use your router to redirect)
-  router.push({ name: 'receive' }); // Adjust with your actual route name
+  // Navigate to the next component
+  router.push({ name: 'receive' });
 };
 </script>
+
 
 <style scoped>
 .container{
