@@ -105,6 +105,11 @@
      align-items: center;
      gap: 2rem;
  }
+ .contact{
+     display: flex;
+     flex-direction: column;
+     gap: 3rem;
+ }
  .contact-component{
     display: flex;
     width: 100%;
@@ -162,7 +167,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30vmin 6vmin 10vmin 6vmin;
+    padding: 6vmin;
     width: 100%;
   }
  

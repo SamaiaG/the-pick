@@ -7,8 +7,6 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue';
-
 const emit= defineEmits(['scrollToSection'])
 
 const scrollToSection = () => {
@@ -16,7 +14,7 @@ const scrollToSection = () => {
 }
 </script>
 <style scoped>
-    .arrows {
+.arrows {
   width: 60px;
   height: 72px;
   position: absolute;

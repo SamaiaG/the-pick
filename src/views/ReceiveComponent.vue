@@ -1,8 +1,8 @@
 <template>
-  <div >
+  <div>
   <TheSection class="receive-section">  
     <div class="hero-receive">
-      <div v-if="formData">
+      <div v-if="formData && !isChoiceConfirmed" class="hero-text">
         <div v-if="formData.decidingUser === 'ME'">
           <h1 class="hero-title">Hey {{ formData.name }}</h1>
           <p class="hero-p">It's time to make the choice!</p>
@@ -14,8 +14,12 @@
           <p class="hero-p">Would you like to help them make the choice?</p>
         </div>
       </div>
+      <div v-if="isChoiceConfirmed" class="hero-text">
+        <h4 class="hero-p">Thank you for using this tool. I hope I could make your life a little bit easier! </h4>
+        <BaseButton class="home-button"><RouterLink to="/" class="h-link">Any other decisions to make?</RouterLink></BaseButton>
+      </div>
     </div>
-    <ArrowComponent @scrollToSection="scrollToSecondSection" />
+    <ArrowComponent v-if="!isChoiceConfirmed" @scrollToSection="scrollToSecondSection" />
   </TheSection>
 
   <TheSection class="second-section" v-show="isSecondSectionVisible" ref="secondSection">
@@ -48,25 +52,15 @@
 
   <BaseOverlay v-show="isSelectedVisible" @close="closeOverlay">
     <h3 class="reveal-title">Congrats, you've made your choice!</h3>
-
     <div v-if="selectedCard && cardFields[selectedCard - 1]" class="card-reveal">
       <div v-for="(category, key) in cardFields[selectedCard - 1]" :key="key">
-        <h4 class="reveal-category">{{ capitalize(key) }}..?</h4>
-        <ul class="reveal-list">
-          <li v-for="(item, index) in category" :key="index" class="reveal-item">{{ item }}</li>
-        </ul>
+          <p v-for="(item, index) in category" :key="index" class="reveal-item">{{ item }}</p>
       </div>
-      <div v-if="cardFields[selectedCard - 1].image" class="image-container">
-    <img :src="cardFields[selectedCard - 1].image" alt="Uploaded Image" class="uploaded-image"/>
-  </div>
     </div>
-
-    <h4 class="end-message">Thank you for using this tool. I hope I could make your life a little bit easier! </h4>
-
   </BaseOverlay>
   <ConfirmAction v-if="isConfirmActionVisible" @close="closeOverlay">
-    <BaseButton @click="selectedVisible" class="confirm">Yes I am</BaseButton>
-    <BaseButton @click="closeConfirmChoice" class="confirm">No, I want to make some changes</BaseButton>
+    <BaseButton @click="confirmChoice" class="confirm">Yes I am</BaseButton>
+    <BaseButton @click="closeConfirmChoice" class="confirm">No, I want to think about it</BaseButton>
   </ConfirmAction>
 </div>
 </template>
@@ -83,13 +77,14 @@ import ArrowComponent from '@/components/ArrowComponent.vue';
 import { useFormStore } from '@/stores/useFormStore';
 
 const formStore = useFormStore();
-const formData = ref(formStore.formData); // Initialize formData here
+const formData = ref(formStore.formData); 
 const cardFields = ref([]);
 const selectedCard = ref('');
 
 const isSelectedVisible = ref(false);
 const isConfirmActionVisible = ref(false);
 const isSecondSectionVisible = ref(true);
+const isChoiceConfirmed = ref(false);
 
 const secondSection = ref(null);
 
@@ -106,19 +101,15 @@ const openConfirmAction = () => {
 const closeConfirmChoice = () => {
   isConfirmActionVisible.value = false;
 };
-const selectedVisible = () => {
+const confirmChoice = () => {
   closeConfirmChoice();
   isSelectedVisible.value = true;
   isSecondSectionVisible.value = false;
-};
-
-const capitalize = (str) => {
-  if (!str) return '';
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  isChoiceConfirmed.value = true;
 };
 
 const scrollToSecondSection = () => {
-  const sectionElement = secondSection.value?.$el || secondSection.value; // Access the actual DOM element
+  const sectionElement = secondSection.value?.$el || secondSection.value;
   if (sectionElement) {
     sectionElement.scrollIntoView({ behavior: 'smooth' });
   } else {
@@ -127,7 +118,7 @@ const scrollToSecondSection = () => {
 };
 
 onMounted(() => {
-  cardFields.value = formStore.formData.cardFields; // Assuming cardFields are part of formData
+  cardFields.value = formStore.formData.cardFields; 
 });
 </script>
 
@@ -185,14 +176,9 @@ onMounted(() => {
   justify-content: space-around;
   gap: 2vmin;
 }
-.reveal-list{
-  list-style: none;
-}
+
 .reveal-item {
-  border: 0.3vmin solid;
-  border-color: transparent transparent transparent var(--secondary-color);
-  padding-left: 1vmin;
-  margin: 0.5vmin;
+  border-color: transparent;
   font-size: 2vmin;
   font-weight: 500;
 }
@@ -201,30 +187,34 @@ onMounted(() => {
   font-weight: 400;
   margin: 1vmin 0;
 }
-.image-container {
-  text-align: center;
-  margin-top: 2vmin;
-}
 
-.uploaded-image {
-  max-width: 100%;
-  max-height: 300px; 
-  object-fit: cover;
-}
-.end-message, .reveal-title{
+ .reveal-title{
   font-size: 2.5vmin;
   font-weight: 300;
   text-align: center;
   margin-bottom: 2.5vmin;
   }
 
-  .end-message{
-    margin-top: 2.5vmin;
-  }
   .option-cards{
   gap: 3vmin
 }
 
+.home-button{
+  background-color: transparent!important;
+  border: var(--secondary-color) 0.3vmin solid;
+  margin-top: 5vmin;
+}
+.home-button:hover{
+  background-color: var(--secondary-op)!important;
+}
+.h-link{
+  color: var(--secondary-color);
+  font-family: Raleway, sans-serif;
+  font-weight: 600;
+}
+.home-button:hover .h-link{
+  color: white
+}
   @media (max-width: 768px) {
     .hero-receive{
       display: flex;
@@ -237,10 +227,6 @@ onMounted(() => {
     .confirm{
       font-size: 12px!important;
     }
-    .option-cards {
-  flex-direction: column;
-  gap: 0
-}
 .card-button{
   width: 100%;
   height: 20vh;

@@ -77,15 +77,14 @@ onUnmounted(() => {
 }
 
 .contact-button{
-    border: 1px solid white;
-    padding: 1vmin 3vmin;
-    margin: 1.5vmin;
+    border: 1px solid white!important;
+    padding: 1vmin 3vmin!important;
+    margin: 1.5vmin!important;
+    background-color: transparent!important;
 }
 .contact-button:hover{
-    background-color: #174218;
-    border-color:#174218
+    background-color: #174218!important;
 }
-
 .hamburger {
   display: none;
   background-image: url('../assets/bars-solid.svg');

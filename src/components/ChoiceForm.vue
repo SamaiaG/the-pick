@@ -175,7 +175,7 @@ const activeCard = ref(null);
 const isOptionOverlayVisible = ref(false);
 const isConfirmActionVisible = ref(false);
 
-const cardFields = ref([{ what: [], image: null }, { what: [], image: null }, { what: [], image: null }]);
+const cardFields = ref([{ what: [] }, { what: []}, { what: []}]);
 
 const generatedLink = ref('');
 
@@ -196,7 +196,6 @@ const setActiveUser = (user) => {
 };
 
 const openOverlay = (cardIndex) => {
-  console.log("Opening overlay for card:", cardIndex);
   activeCard.value = cardIndex - 1;
   isOptionOverlayVisible.value = true;
 };
@@ -208,7 +207,6 @@ const openConfirmAction = () => {
 };
 
 const closeOverlay = () => {
-  console.log("Closing overlay");
   isOptionOverlayVisible.value = false;
   isConfirmActionVisible.value = false;
 };
@@ -325,10 +323,7 @@ label, .form-select{
 .users, .card-number{
   gap: 5vmin
 }
-.option-cards {
-  flex-direction: column;
-  gap: 0
-}
+
 .card-button{
   width: 100%;
   height: 20vh;

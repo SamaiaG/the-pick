@@ -93,6 +93,7 @@ const scrollToSecondSection = () => {
 .find{
   background-color: var(--primary-blue);
   border: var(--primary-color) 0.3vmin solid;
+  color: white
 }
 .find:hover{
   background-color: var(--primary-op);
@@ -101,6 +102,7 @@ const scrollToSecondSection = () => {
 .share{
   background-color: transparent!important;
   border: var(--secondary-color) 0.3vmin solid;
+  color: var(--secondary-color)
 }
 .share:hover{
   background-color: var(--secondary-op)!important;

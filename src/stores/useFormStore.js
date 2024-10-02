@@ -7,7 +7,7 @@ export const useFormStore = defineStore('formStore', {
       decisionType: '',
       partyType: '',
       cardNumber: 2,
-      cardFields: [{ what: [], image: null }, { what: [], image: null }, { what: [], image: null }],
+      cardFields: [{ what: []}, { what: []}, { what: []}],
       decidingUser: 'ME',
       decidingUserName: '',
       userEmail: ''

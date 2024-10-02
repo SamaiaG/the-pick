@@ -7,14 +7,19 @@
 <style scoped>
     button{
         padding: 1.4vmin 3.4vmin;
-        border: none;
+        background-color: white;
         border-radius: 0.8vmin;
-        background-color: transparent;
-        color: var(--color-text);
+        border: 0.4vmin solid #174218;
+        color: #174218;
         font-size: 1.8vmin;
         font-family: Raleway, sans-serif;
-        cursor: pointer;
         font-weight: 600;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #174218;
+        color: white;
+        cursor: pointer;
     }
     @media (max-width: 768px) {
         button{
