@@ -1,10 +1,7 @@
 <template>
     <div class="hamburger-menu">
-        <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
+        <RouterLink to="/contact" class="h-link" @click="closeHam" >Contact</RouterLink>
     </div>
-    <div>
-    <ContactComponent class="contact-component" v-show="isContactOverlayVisible"  @close="closeOverlay"/>
-</div>
 </template>
 
 <script setup> 
@@ -19,7 +16,7 @@ const props = defineProps({
     flex-direction: column;
     background-color: rgb(3, 2, 4); 
     box-shadow: rgba(17, 12, 46, 0.45) 0px 48px 100px 0px;
-    width: calc(100vw - 25px);
+    width: 100vw;
     height: 100vh;
 }
 .h-link{
@@ -38,9 +35,4 @@ const props = defineProps({
     font-family: 'Raleway', sans-serif; 
 }
 
-@media (max-width: 768px) {
-    .hamburger-menu {
-        display: flex;
-    }
-}
 </style>

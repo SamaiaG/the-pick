@@ -1,18 +1,17 @@
 <template>
-    <header>
-      <div class="h-container">
-        <RouterLink to="/" class="h-link"> <img src="../assets/logo.png" alt="logo" id="logo"></RouterLink>
-        <BaseButton class="contact-button">
-          <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
-        </BaseButton>
-        <div class="hamburger" :class="{ 'is-open': isHamOpen }" @click="toggleHam"></div>
-      </div>
-      <HamburgerMenu class="hamburger-menu" v-if="isHamOpen" :closeHam="toggleHam" />
-
-<BaseOverlay v-if="isContactOverlayVisible"  @close="closeOverlay">
-  <ContactComponent class="contact-component" />
-</BaseOverlay>
-</header>
+  <div>
+    <div class="h-container">
+      <RouterLink to="/" class="h-link"> <img src="../assets/logo.png" alt="logo" id="logo"></RouterLink>
+      <BaseButton class="contact-button">
+        <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
+      </BaseButton>
+      <div class="hamburger" :class="{ 'is-open': isHamOpen }" @click="toggleHam"></div>
+    </div>
+    <HamburgerMenu class="hamburger-menu" v-if="isHamOpen" :closeHam="toggleHam" />
+    <BaseOverlay v-if="isContactOverlayVisible"  @close="closeOverlay">
+      <ContactComponent class="contact-component" />
+    </BaseOverlay>
+  </div>
 </template>
 
 <script setup>
@@ -101,7 +100,6 @@ onUnmounted(() => {
   background-image: url('../assets/xmark-solid.svg');
 }
 .hamburger-menu{
-  display: none;
   position: fixed;
   top: 53px;
   right: 0;
@@ -116,7 +114,7 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .h-container{
     padding: 0 4vmin;
-    width: calc(100vw - 25px);
+    width: 100vw;
   }
   .hamburger{
     display: block;

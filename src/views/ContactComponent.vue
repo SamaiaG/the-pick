@@ -1,44 +1,40 @@
 <template>
-    <div class="contact">
-        <div class="contact">
+      <div class="contact">
         <h4 class="contact-title mb-5">Contact me</h4>
-    <div class="contact-component">
-        <form class="contact-form" @submit.prevent="handleSubmit">
-            <div class="name">
-                <div class="form-floating mb-3">
+        <div class="contact-component">
+          <form class="contact-form" @submit.prevent="handleSubmit">
+              <div class="name">
+                  <div class="form-floating mb-3">
                     <input v-model="firstname" type="text" class="form-control" id="floatingInput" placeholder="firstname"  required>
                     <label for="floatingInput">First Name</label>
-                </div>
-                <div class="form-floating mb-3">
+                  </div>
+                  <div class="form-floating mb-3">
                     <input v-model="lastname" type="text" class="form-control" id="floatingInput" placeholder="lastname"  required>
                     <label for="floatingInput">Last Name</label>
-                </div>
-            </div>
-            <div class="email form-floating mb-3">
+                  </div>
+              </div>
+              <div class="email form-floating mb-3">
                 <input v-model="email" type="email" class="form-control" id="floatingInput" placeholder="email"  required>
                 <label for="floatingInput">Email</label>
-            </div>
-            <div class="message form-group mb-3">
+              </div>
+              <div class="message form-group mb-3">
                 <textarea v-model="message" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter your message" required></textarea>
-            </div>
-            <BaseButton type="submit" class="submit-btn" :disabled="isSubmitting">{{isSubmitting ? 'sending...' : 'send message'}}</BaseButton>
-
-         </form>
-        <div class="right-part">
+              </div>
+              <BaseButton type="submit" class="submit-btn" :disabled="isSubmitting">{{isSubmitting ? 'sending...' : 'send message'}}</BaseButton>
+          </form>
+          <div class="right-part">
             <img src="../assets/contact.jpg" alt="contact" class="contact_img">
+          </div>
         </div>
-    </div>
-     <div class="other-methods mt-5">
-            <a href="https://www.linkedin.com/in/samaia-gahramanov-569343232/">
-                <img src="../assets/linkedin_icon.svg" alt="contact" class="contact_link">
-            </a>
-            <a class="gmail" href="mailto:samaiagahramanov@gmail.com">
-                <img src="../assets/gmail_icon.svg" alt="contact" class="contact_link">
-            </a>
-            
+        <div class="other-methods mt-5">
+          <a href="https://www.linkedin.com/in/samaia-gahramanov-569343232/">
+            <img src="../assets/linkedin_icon.svg" alt="contact" class="contact_link">
+          </a>
+          <a class="gmail" href="mailto:samaiagahramanov@gmail.com">
+            <img src="../assets/gmail_icon.svg" alt="contact" class="contact_link">
+          </a>
         </div>
-    </div>
-    </div>
+      </div>
  </template>
  
  <script setup>
@@ -46,7 +42,6 @@
  import emailjs from 'emailjs-com';
  
  import BaseButton from '@/components/BaseButton.vue';
- import BaseOverlay from '@/components/BaseOverlay.vue';
  
  const firstname = ref('');
  const lastname = ref('');
@@ -160,5 +155,16 @@
     height: 40px;
   }
  }
+
+ @media (max-width: 768px) {
+  .contact{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30vmin 6vmin 10vmin 6vmin;
+    width: 100%;
+  }
  
+}
  </style>
