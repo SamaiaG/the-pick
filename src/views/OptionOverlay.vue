@@ -1,14 +1,15 @@
 <template>
-      <div class="option-overlay">
-        <h3 class="title">What is your option?</h3>
-        <div class="sec">
-          <div class="input-fields">
-              <input v-model="localFields.what[cardIndex]" type="text" class="form-control idea" :id="'whatInput' + cardIndex" placeholder="Your idea here">
-          </div>
-        </div>
-
-        <BaseButton class="save" @click="saveFields">Save this Card</BaseButton>
+  <div class="option-overlay">
+    <h3 class="title">What is your option?</h3>
+    <div class="sec">
+      <div class="input-fields">
+        <input v-model="localFields.what[props.cardIndex]" type="text" class="form-control idea" :id="'whatInput' + cardIndex" placeholder="Your idea here">
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p> 
       </div>
+    </div>
+
+    <BaseButton class="save" @click="saveFields">Save this Card</BaseButton>
+  </div>
 </template>
 
 <script setup>
@@ -20,8 +21,21 @@ const props = defineProps(['fields', 'cardIndex'])
 const localFields = reactive(JSON.parse(JSON.stringify(props.fields)))
 const emit = defineEmits(['save', 'close'])
 
+// Error message state
+const errorMessage = ref('')
+
+// Save fields with validation
 const saveFields = () => {
-  
+  // Check if the input field is empty
+  if (!localFields.what[props.cardIndex] || localFields.what[props.cardIndex].trim() === '') {
+    errorMessage.value = 'Please enter something in the field' // Show error message
+    return
+  }
+
+  // Clear the error message if input is valid
+  errorMessage.value = ''
+
+  // Proceed with saving the data
   const dataToSave = {
     cardIndex: props.cardIndex,
     fields: localFields,
@@ -59,7 +73,6 @@ const saveFields = () => {
 
 .input-fields {
   width: 100%;
-  margin-bottom: 2vmin;
 }
 
 .form-floating {
@@ -77,6 +90,12 @@ const saveFields = () => {
   background-color: transparent; 
   text-align: center;
 }
+.error-message {
+  color: var(--bs-form-invalid-color);
+  font-size: 1.3vmin;
+  margin-top: 5px;
+  text-align: right;
+}
 
 @media (max-width: 768px) {
   .form-control {
@@ -84,6 +103,9 @@ const saveFields = () => {
   }
   .title{
     font-size: 12px
+  }
+  .error-message {
+    font-size: 12px;
   }
 }
 </style>

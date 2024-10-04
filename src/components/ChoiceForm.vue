@@ -55,7 +55,7 @@
       />
     </div>
     
-    <p class="mb-3 align-self-start">Now that you've completed the cards, it's time for the choice to be made!</p>
+    <p class="mb-3 align-self-center">Now that you've completed the cards, it's time for the choice to be made!</p>
     
  <!--    <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
       <p>Who will pick the card and make the choice?</p>

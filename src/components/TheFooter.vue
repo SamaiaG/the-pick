@@ -1,44 +1,44 @@
 <template>
     <div class="footer">
         <div class="container">
-        <div class="left-part">
-            <img src="../assets/logo.png" alt="logo" class="logo2">
-            <p>For those who are unsure and need some help.</p>
+            <div class="left-part">
+                <img src="../assets/logo.png" alt="logo" class="logo2">
+                <p>For those who are unsure and need some help.</p>
+            </div>
+            <p class="copyright">© Copyright PickPerfect</p>
+            <div class="right-part">
+                <div class="contact-methods">
+                    <a href="https://www.linkedin.com/in/samaia-gahramanov-569343232/">
+                        <img src="../assets/linkedin_icon.svg" alt="contact" class="contact_link">
+                    </a>
+                    <a class="gmail" href="mailto:samaiagahramanov@gmail.com">
+                        <img src="../assets/gmail_icon.svg" alt="contact" class="contact_link">
+                    </a>
+                    <BaseButton class="contact-button">
+                        <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
+                    </BaseButton>
+                </div>
+            </div>
         </div>
-        <p class="copyright">© Copyright PickPerfect</p>
-        <div class="right-part">
-            <p>Share it with your friends</p>
-            <ShareOutside class="share-outside"/>
-        </div>
+        <BaseOverlay v-if="isContactOverlayVisible"  @close="closeOverlay">
+            <ContactComponent class="contact-component" />
+        </BaseOverlay>
     </div>
-
-</div>
 </template>
 
 <script setup>
-import FindMore from '../views/FindMore.vue'
+import BaseOverlay from './BaseOverlay.vue'
+import BaseButton from './BaseButton.vue'
 import ContactComponent from '../views/ContactComponent.vue'
-import ShareOutside from '../views/ShareOutside.vue'
 import { ref } from 'vue'
 
-const isFindMoreVisible = ref(false)
-const isShareOutsideVisible = ref(false)
 const isContactOverlayVisible = ref(false)
 
-const findMoreOverlay = () => {
-  isFindMoreVisible.value = true
-}
-
-const shareOutsideOverlay = () => {
-  isShareOutsideVisible.value = true
-}
 const contactOverlay = () => {
   isContactOverlayVisible.value = true
 }
 
 const closeOverlay = () => {
-  isFindMoreVisible.value = false
-  isShareOutsideVisible.value = false
   isContactOverlayVisible.value = false
 }
 </script>
@@ -47,7 +47,6 @@ const closeOverlay = () => {
 .footer{
     width: 100%;
     background-color: black;
-    color: white;
     font-size: 1.3vmin;
     padding: 4vmin 16vmin
 
@@ -55,7 +54,7 @@ const closeOverlay = () => {
 .right-part{
     display: flex;
     flex-direction: column;
-    align-self: flex-start;
+    align-items: end;
 }
 .nav{
     gap:2vmin
@@ -74,10 +73,32 @@ const closeOverlay = () => {
     padding-bottom: 1vmin;
 }
 p{
-    margin: 0
+    margin: 0;
+    color: white
 }
-.share-outside{
-    margin-top: 1vmin
+.contact_link{
+    width: 3vmin;
+    height: 3vmin;
+    cursor: pointer;
+}
+.contact-methods{
+    margin-top: 1vmin;
+    display: flex;
+    gap: 2vmin;
+    align-items: center
+}
+.contact-button{
+    border: 1px solid white!important;
+    color: white;
+    background-color: transparent;
+    padding: 0.5vmin 2vmin;
+    font-size: 1.3vmin;
+}
+.contact-button:hover{
+    background-color: white;
+}
+.contact-button:hover .h-link{
+    color: black;
 }
 @media (max-width: 1024px) {
         .footer{
@@ -103,7 +124,7 @@ p{
         }
         .right-part{
             align-self: center;
-            gap: 3vmin
+            align-items: center;
         }
         .copyright{
             order: 3;
@@ -111,6 +132,15 @@ p{
         .logo2{
     width: 22vmin;
     padding-bottom: 12px;
+}
+.contact_link{
+    width: 30px;
+    height: 30px;
+}
+.contact-button{
+    padding: auto;
+    font-size: 16px;
+    height: 30px;
 }
     
     }
