@@ -8,7 +8,6 @@
       </div>
       <div class="hero-buttons">
         <BaseButton class="find" @click="findMoreOverlay">Find more about how it works</BaseButton>
-        <BaseButton class="share" @click="shareOutsideOverlay">Share it with your friends</BaseButton>
       </div>  
     </div>
     <ArrowComponent @scrollToSection="scrollToSecondSection" />  
@@ -19,9 +18,6 @@
 
 <BaseOverlay v-if="isFindMoreVisible"  @close="closeOverlay">
   <FindMore class="find-more" />
-</BaseOverlay>
-<BaseOverlay v-if="isShareOutsideVisible"  @close="closeOverlay">
-  <ShareOutside class="share-outside"/>
 </BaseOverlay>
 </div>
 </template>
@@ -133,7 +129,7 @@ const scrollToSecondSection = () => {
     flex-direction: column;
     }
   :deep(.second-section > .s-container){
-  padding:  8vmin 4vmin;
+  padding:  16vmin 4vmin;
 }
 }
 

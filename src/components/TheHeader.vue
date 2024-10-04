@@ -84,6 +84,7 @@ onUnmounted(() => {
 }
 .contact-button:hover{
     background-color: #174218!important;
+    border: 1px solid #174218!important;
 }
 .hamburger {
   display: none;

@@ -25,8 +25,8 @@
   <TheSection class="second-section" v-show="isSecondSectionVisible" ref="secondSection">
     <div v-if="formData">
       <p v-if="formData.decidingUser === 'ME'" class="received-p">
-        Below you see {{ formData.cardNumber }} cards you completed with different options.<br>
-        All you have to do is to select the one you like and submit your choice.
+        Below you see <span class="cn"> {{ formData.cardNumber }} cards</span> you completed with different options.<br>
+        All you have to do is to <span class="cn">select</span> the one you like and <span class="cn">submit</span> your choice.
       </p>
       <p v-else class="received-p">
         Below you see {{ formData.cardNumber }} cards your friend completed with different options.<br>
@@ -51,7 +51,7 @@
   </TheSection>
 
   <BaseOverlay v-show="isSelectedVisible" @close="closeOverlay">
-    <h3 class="reveal-title">Congrats, you've made your choice!</h3>
+    <p class="received-p">Congrats, you've made your choice!</p>
     <div v-if="selectedCard && cardFields[selectedCard - 1]" class="card-reveal">
       <div v-for="(category, key) in cardFields[selectedCard - 1]" :key="key">
           <p v-for="(item, index) in category" :key="index" class="reveal-item">{{ item }}</p>
@@ -174,6 +174,7 @@ onMounted(() => {
 .card-reveal {
   display: flex;
   justify-content: space-around;
+  font-size: 16px;
   gap: 2vmin;
 }
 
@@ -200,20 +201,25 @@ onMounted(() => {
 }
 
 .home-button{
-  background-color: transparent!important;
-  border: var(--secondary-color) 0.3vmin solid;
-  margin-top: 5vmin;
+  background-color: var(--primary-blue);
+  border: var(--primary-blue) 0.3vmin solid;
 }
 .home-button:hover{
-  background-color: var(--secondary-op)!important;
+  background-color: var(--primary-op)!important;
 }
 .h-link{
-  color: var(--secondary-color);
+  color: white;
   font-family: Raleway, sans-serif;
   font-weight: 600;
 }
 .home-button:hover .h-link{
   color: white
+}
+.hero-text{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 3vmin
 }
   @media (max-width: 768px) {
     .hero-receive{
@@ -221,19 +227,37 @@ onMounted(() => {
       flex-direction: column;
       align-items: center;
     }
+    .hero-text{
+      align-items: center;
+    }
     .hero-title,.hero-p{
       text-align: center;
     }
+    .hero-title{
+      font-size: 48px;
+    }
+    .hero-p{
+      font-size: 16px;
+    }
     .confirm{
-      font-size: 12px!important;
+      font-size: 18px!important;
+    }
+    .received-p{
+      font-size: 16px;
     }
 .card-button{
   width: 100%;
   height: 20vh;
 }
+.reveal-item{
+  font-size: 22px;
+}
 .cards, .deciding-user{
   flex-direction: column !important;
   gap: 2vmin
+}
+:deep(.second-section > .s-container){
+  padding:  16vmin 4vmin;
 }
 
   }

@@ -39,7 +39,7 @@ function handleBackgroundClick() {
         background-color: white;
         box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
         border-radius: 10px;
-        overflow: hidden;
+        overflow:hidden;
         min-height: 20vmin;
     }
     .close-icon{
@@ -48,5 +48,11 @@ function handleBackgroundClick() {
         right: 2vmin;
         width: 3vmin;
         cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+        .overlay-c{
+            width: 90%;
+        }
     }
 </style>

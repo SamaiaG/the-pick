@@ -36,4 +36,16 @@ import BaseOverlay from '../components/BaseOverlay.vue'
 :deep(.close-icon){
     display: none;
 }
+
+@media (max-width: 768px) {
+    .title{
+        font-size: 16px;
+    }
+    .buttons{
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem
+
+    }
+}
 </style>

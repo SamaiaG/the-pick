@@ -1,8 +1,8 @@
 <template>
       <div class="option-overlay">
+        <h3 class="title">What is your option?</h3>
         <div class="sec">
           <div class="input-fields">
-            <!-- Text input fields -->
               <input v-model="localFields.what[cardIndex]" type="text" class="form-control idea" :id="'whatInput' + cardIndex" placeholder="Your idea here">
           </div>
         </div>
@@ -40,6 +40,10 @@ const saveFields = () => {
   gap: 4vmin;
 }
 
+.title{
+  font-size: 3vmin;
+  color: #174218
+}
 .sec {
   width: 100%;
   height: auto;
@@ -65,19 +69,21 @@ const saveFields = () => {
 .form-control {
   height: calc(2rem + calc(var(--bs-border-width)*2));
   min-height: calc(2.5rem + calc(var(--bs-border-width) * 2));
-  border: 0.1vmin solid;
-  border-color: #174218;
+  border:none;
   width: 100%;
   font-size: 2vmin;
   padding: 1vmin;
   margin-bottom: 1vmin;
-  background-color: #f9f9f9; 
+  background-color: transparent; 
   text-align: center;
 }
 
 @media (max-width: 768px) {
   .form-control {
     font-size: 16px;
+  }
+  .title{
+    font-size: 12px
   }
 }
 </style>

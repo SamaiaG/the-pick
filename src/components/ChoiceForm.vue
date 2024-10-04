@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @submit.prevent="generateLink">
+  <div class="container">
     <div class="form-floating mb-3">
       <input 
         type="text" 
@@ -13,34 +13,7 @@
       <label for="floatingInput">What is your name?</label>
       <div v-if="formErrors.name" class="invalid-feedback">Please enter your name.</div>
     </div>
-    
-    <select 
-      class="form-select decision-type mb-3" 
-      aria-label="Default select example" 
-      @change="updateDecisionType($event)" 
-      v-model="formData.decisionType" 
-      required
-    >
-      <option value="" disabled selected>What are you not sure with?</option>
-      <option value="1">I have to make a personal decision.</option>
-      <option value="2">I have to organize a party.</option>
-    </select>
-    
-    <div class="if-party" v-if="formData.decisionType === '2'">
-      <select 
-        class="form-select party-type mb-3" 
-        aria-label="Default select example" 
-        v-model="formData.partyType" 
-        required
-      >
-        <option value="" disabled selected>What kind of party do you have to organize?</option>
-        <option value="1">A birthday party</option>
-        <option value="2">A wedding</option>
-        <option value="3">An (any) anniversary</option>
-        <option value="4">Something else</option>
-      </select>
-    </div>
-    
+
     <div class="cards mb-3 d-flex justify-content-between align-items-center">
       <p>How many cards do you need?</p>
       <div class="card-number d-flex">
@@ -57,7 +30,7 @@
       <div v-if="formErrors.cardNumber" class="invalid-feedback d-block">Please select the number of cards.</div>
     </div>
     
-    <div class="option-cards d-flex wrap justify-content-center">
+    <div class="option-cards d-flex wrap justify-content-center mb-3">
       <OptionCard 
         class="card1" 
         imageSrc="cards/card1.jpg" 
@@ -84,7 +57,7 @@
     
     <p class="mb-3 align-self-start">Now that you've completed the cards, it's time for the choice to be made!</p>
     
-    <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
+ <!--    <div class="deciding-user mb-5 d-flex justify-content-between align-items-center">
       <p>Who will pick the card and make the choice?</p>
       <div class="users d-flex">
         <button 
@@ -97,7 +70,7 @@
           {{ user }}
         </button>
       </div>
-    </div>
+    </div> 
     
     <div class="se-chooses" v-if="formData.decidingUser === 'SOMEONE ELSE'">
       <div class="form-floating mb-3">
@@ -128,6 +101,7 @@
         <div v-if="formErrors.userEmail" class="invalid-feedback">Please enter a valid email address.</div>
       </div>
     </div>
+    -->
     
     <BaseButton @click="openConfirmAction" class="make-choice">Make the choice</BaseButton>
     <p v-if="generatedLink">Share this link:</p>
@@ -318,7 +292,7 @@ label, .form-select{
 @media (max-width: 768px) {
 .btn{
   padding: 0.6vmin 3vmin;
-  font-size: 3vmin;
+  font-size: 16px;
 }
 .users, .card-number{
   gap: 5vmin
@@ -333,15 +307,15 @@ label, .form-select{
   gap: 2vmin
 }
 p{
-  margin-bottom: 0;
-  font-size: 18px;
+  margin-bottom: 1vmin;
+  font-size: 20px;
   text-align: center;
 }
 .make-choice{
-  font-size: 12px!important;
+  font-size: 18px!important;
 }
 label, .form-select{
-  font-size: 2.5vmin;
+  font-size: 12px;
 }
 }
 </style>

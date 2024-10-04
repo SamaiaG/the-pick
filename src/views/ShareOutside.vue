@@ -1,6 +1,5 @@
 <template>
     <div class="share-outside">
-        <h4 class="title">Share it with your friends!</h4>
         <div class="share-links">
             <ShareNetwork
             network="facebook"
@@ -11,17 +10,6 @@
             hashtags="thepick"
             >
            <img src="../assets/facebook_icon.svg" alt="Share on Facebook" class="social-icon"/>   
-            </ShareNetwork>
-            <ShareNetwork
-            network="twitter"
-            url="https://samaiag.github.io/the-pick/"
-            title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-            description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-            quote="The hot reload is so fast it\'s near instant. - Evan You"
-            hashtags="thepick"
-            >
-            <img src="../assets/instagram_icon.svg" alt="Share on Facebook" class="social-icon"/>  
-            <!-- have to custom this link -->
             </ShareNetwork>
             <ShareNetwork
             network="linkedin"
@@ -58,6 +46,7 @@ const copyLink = () => {
     })
 
 }
+
 </script>
 
 <style scoped>
@@ -81,14 +70,15 @@ const copyLink = () => {
     padding: 0;
 }
 .social-icon{
-    width: 5vmin;
-    height: 5vmin;
+    width: 3vmin;
+    height: 3vmin;
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {
     .social-icon{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

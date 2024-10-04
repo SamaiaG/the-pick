@@ -7,17 +7,11 @@
         </div>
         <p class="copyright">© Copyright PickPerfect</p>
         <div class="right-part">
-            <nav class="nav">
-                <RouterLink to="/" class="h-link"  @click="findMoreOverlay" >About</RouterLink>
-                <RouterLink to="/" class="h-link" @click="contactOverlay">Contact</RouterLink>
-                <RouterLink to="/" class="h-link"  @click="shareOutsideOverlay">SHARE</RouterLink>
-            </nav>
+            <p>Share it with your friends</p>
+            <ShareOutside class="share-outside"/>
         </div>
     </div>
-  
-    <ShareOutside class="share-outside" v-show="isShareOutsideVisible"  @close="closeOverlay"/>
-    <FindMore class="find-more" v-show="isFindMoreVisible"  @close="closeOverlay"/>
-    <ContactComponent class="contact-component" v-show="isContactOverlayVisible"  @close="closeOverlay"/>
+
 </div>
 </template>
 
@@ -60,6 +54,7 @@ const closeOverlay = () => {
 }
 .right-part{
     display: flex;
+    flex-direction: column;
     align-self: flex-start;
 }
 .nav{
@@ -78,7 +73,12 @@ const closeOverlay = () => {
     width: 10vmin;
     padding-bottom: 1vmin;
 }
-
+p{
+    margin: 0
+}
+.share-outside{
+    margin-top: 1vmin
+}
 @media (max-width: 1024px) {
         .footer{
             padding: 4vmin 8vmin;
@@ -103,6 +103,7 @@ const closeOverlay = () => {
         }
         .right-part{
             align-self: center;
+            gap: 3vmin
         }
         .copyright{
             order: 3;
